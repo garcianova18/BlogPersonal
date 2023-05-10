@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlogPersonal.Models;
+namespace Dominio.Models;
 
 public partial class User
 {

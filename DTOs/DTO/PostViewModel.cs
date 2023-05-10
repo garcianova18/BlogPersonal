@@ -1,7 +1,9 @@
-﻿using BlogPersonal.Models;
-using Microsoft.Build.Framework;
+﻿
 
-namespace BlogPersonal.ViewModels
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+
+namespace DTOs.DTO
 {
     public class PostViewModel
     {
@@ -12,8 +14,6 @@ namespace BlogPersonal.ViewModels
         public string Descripcion { get; set; }
 
         public IFormFile Imagen { get; set; }
-
-        public int Status { get; set; }
 
         [Required] 
         public int IdCategoria { get; set; }

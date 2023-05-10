@@ -1,22 +1,33 @@
-﻿using BlogPersonal.Models;
-using BlogPersonal.ViewModels;
+﻿
+using AutoMapper;
+using Dominio.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Persistencia.Context;
+using Servicios.Repository;
+using Servicios.Servicices;
 using System.Reflection.Metadata;
+using DTOs.DTO;
+
 
 namespace BlogPersonal.Controllers
 {
     public class PostController : Controller
     {
-        private readonly BlogPersonalContext _context;
         private readonly IHostEnvironment environment;
-
-        public PostController(BlogPersonalContext context, IHostEnvironment environment )
+        private readonly IMapper _mapper;
+        private readonly IServicicesComboBox comboBox;
+        private readonly IGuardarimagen guardarimagen;
+        private readonly IRepositoryGeneric<Post> _repository;
+        public PostController( IRepositoryGeneric<Post> repository, IHostEnvironment environment, IMapper mapper, IServicicesComboBox comboBox, IGuardarimagen guardarimagen)
         {
-            _context = context;
             this.environment = environment;
+            _mapper = mapper;
+            this.comboBox = comboBox;
+            this.guardarimagen = guardarimagen;
+            _repository = repository;
         }
         public IActionResult Index()
         {
@@ -25,7 +36,7 @@ namespace BlogPersonal.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.IdCategoria = ComboCategoria();
+            ViewBag.IdCategoria = comboBox.ComboCategoria();
 
 
             return View();
@@ -35,61 +46,40 @@ namespace BlogPersonal.Controllers
         public async Task<IActionResult> Create(PostViewModel post)
         {
 
-            ViewBag.IdCategoria = ComboCategoria();
+            ViewBag.IdCategoria = comboBox.ComboCategoria();
 
             if (ModelState.IsValid)
             {
-                var model = new Post();
 
-                model.Titulo = post.Titulo;
-                model.Descripcion = post.Descripcion;
-                model.Status = 1;
-                model.IdCategoria = post.IdCategoria;
-                model.FechaPublicado = DateTime.Now;
-                model.IdUser = 1;
+                var postMapper = _mapper.Map<Post>(post);
 
-                if (post.Imagen !=null) {
-
-                     //Obetener el nombre y extension del archivo para gardar en DB como string
-                    string FileName = Path.GetFileNameWithoutExtension(post.Imagen.FileName);
-                    string  Extension = Path.GetExtension(post.Imagen.FileName);
-                    model.Imagen = FileName + Extension;
+                postMapper.Status = 1;
+                postMapper.FechaPublicado = DateTime.Now;
+                postMapper.IdUser = 1;
 
 
-                    // guardar imagene en la ruta wwwroot/Imagenes
-                    string Ruta = "./wwwroot/imagenes/" + FileName + Extension;
-
-                    using (FileStream stream = new FileStream(Ruta, FileMode.Create))
-                    {
-                       await post.Imagen.CopyToAsync(stream);
-                    }
-                }
-                else
+                if (post.Imagen != null)
                 {
-                    model.Imagen = null;
-                }
-                
 
-                _context.Add(model);
-                _context.SaveChanges();
+
+                  postMapper.Imagen = await guardarimagen.GuardarImagenes(post);
+
+                   
+                }
+
+
+               await _repository.Create(postMapper);
+
             }
 
 
-            return View();
+
+
+            return View(post);
         }
 
 
-        public List<SelectListItem> ComboCategoria()
-        {
+      
 
-            var categoria = _context.Categoria.Select(c => new SelectListItem
-            {
-                Text = c.Nombre,
-                Value = c.Id.ToString()
-            }).ToList();
-
-            
-            return categoria;
-        }
     }
 }
