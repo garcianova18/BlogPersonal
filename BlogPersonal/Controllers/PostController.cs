@@ -1,15 +1,10 @@
 ﻿
 using AutoMapper;
 using Dominio.Models;
+using DTOs.DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using Persistencia.Context;
 using Servicios.Repository;
 using Servicios.Servicices;
-using System.Reflection.Metadata;
-using DTOs.DTO;
 
 
 namespace BlogPersonal.Controllers
@@ -20,8 +15,8 @@ namespace BlogPersonal.Controllers
         private readonly IMapper _mapper;
         private readonly IServicicesComboBox comboBox;
         private readonly IGuardarimagen guardarimagen;
-        private readonly IRepositoryGeneric<Post> _repository;
-        public PostController( IRepositoryGeneric<Post> repository, IHostEnvironment environment, IMapper mapper, IServicicesComboBox comboBox, IGuardarimagen guardarimagen)
+        private readonly IRepositoryPost _repository;
+        public PostController(IRepositoryPost repository, IHostEnvironment environment, IMapper mapper, IServicicesComboBox comboBox, IGuardarimagen guardarimagen)
         {
             this.environment = environment;
             _mapper = mapper;
@@ -29,9 +24,13 @@ namespace BlogPersonal.Controllers
             this.guardarimagen = guardarimagen;
             _repository = repository;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var post = await _repository.GetAll();
+
+            var PostMapper = _mapper.Map<List<ListPostVM>>(post);
+
+            return View(PostMapper);
         }
 
         public IActionResult Create()
@@ -43,7 +42,7 @@ namespace BlogPersonal.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PostViewModel post)
+        public async Task<IActionResult> Create(CreatePostVM post)
         {
 
             ViewBag.IdCategoria = comboBox.ComboCategoria();
@@ -62,14 +61,15 @@ namespace BlogPersonal.Controllers
                 {
 
 
-                  postMapper.Imagen = await guardarimagen.GuardarImagenes(post);
+                    postMapper.Imagen = await guardarimagen.GuardarImagenes(post);
 
-                   
+
                 }
 
 
-               await _repository.Create(postMapper);
+                await _repository.Create(postMapper);
 
+                return RedirectToAction("Index");
             }
 
 
@@ -79,7 +79,25 @@ namespace BlogPersonal.Controllers
         }
 
 
-      
+        public async Task<IActionResult> GetPost(int? id)
+        {
+
+            if (id is null || id ==0)
+            {
+                return NotFound();
+            }
+
+            var post = await _repository.GetPost(id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+            var PostMapper = _mapper.Map<ListPostVM>(post);
+
+            return View(PostMapper);
+
+        }
 
     }
 }

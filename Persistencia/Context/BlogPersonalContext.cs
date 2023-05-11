@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Dominio.Models;
 
-
 namespace Persistencia.Context;
 
 public partial class BlogPersonalContext : DbContext
@@ -22,7 +21,6 @@ public partial class BlogPersonalContext : DbContext
     public virtual DbSet<Post> Posts { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -18,6 +18,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IServicicesComboBox, ServicicesComboBox>();
 builder.Services.AddScoped<IGuardarimagen, Guardarimagen>();
 
+builder.Services.AddScoped<IRepositoryPost, RepositoryPost>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +39,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Post}/{action=Create}/{id?}");
+    pattern: "{controller=Post}/{action=Index}/{id?}");
 
 app.Run();

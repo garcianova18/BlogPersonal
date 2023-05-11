@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DTOs.DTO
 {
-    public class PostViewModel
+    public class CreatePostVM
     {
 
         [Required]

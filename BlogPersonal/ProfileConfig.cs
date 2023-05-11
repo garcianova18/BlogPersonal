@@ -9,7 +9,8 @@ namespace BlogPersonal
     {
         public ProfileConfig()
         {
-            CreateMap<PostViewModel, Post>().ReverseMap();
+            CreateMap<CreatePostVM, Post>().ReverseMap();
+            CreateMap<ListPostVM, Post>().ReverseMap();
         }
     }
 }
