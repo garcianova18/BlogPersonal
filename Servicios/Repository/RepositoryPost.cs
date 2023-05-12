@@ -1,5 +1,6 @@
 ﻿using Dominio.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using Persistencia.Context;
 
 
@@ -11,7 +12,10 @@ namespace Servicios.Repository
     {
         Task Create(Post post);
         Task<IEnumerable<Post>> GetAll();
+        Task<Post> GetById(int id);
         Task<Post> GetPost(int? id);
+        Task Update(Post post);
+        Task<bool> VerificarExiste(int id);
     }
     public class RepositoryPost:IRepositoryPost
     {
@@ -45,6 +49,25 @@ namespace Servicios.Repository
         {
             _context.Posts.Add(post);
            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Post> GetById(int id)
+        {
+
+          return await _context.Posts.FindAsync(id);
+        }
+
+        public async Task<bool> VerificarExiste(int id)
+        {
+           return await _context.Posts.AnyAsync(p=> p.Id == id);
+
+        }
+
+        public async Task Update(Post post)
+        {
+
+             _context.Posts.Update(post);
+            await _context.SaveChangesAsync();
         }
 
       

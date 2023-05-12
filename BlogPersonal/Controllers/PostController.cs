@@ -79,7 +79,7 @@ namespace BlogPersonal.Controllers
         }
 
 
-        public async Task<IActionResult> GetPost(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
 
             if (id is null || id ==0)
@@ -97,6 +97,59 @@ namespace BlogPersonal.Controllers
 
             return View(PostMapper);
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            ViewBag.IdCategoria = comboBox.ComboCategoria();
+
+            if (id is null || id == 0)
+            {
+
+                return NotFound();
+            }
+
+            var post = await _repository.GetById(id.GetValueOrDefault());
+            if (post is null)
+            {
+                return NotFound();
+            }
+
+            var postMapper = _mapper.Map<EditPostVM>(post);
+
+            return View(postMapper);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditPostVM postVM)
+         {
+            if (ModelState.IsValid)
+            {
+               
+               var post = await _repository.VerificarExiste(postVM.Id);
+                if (!post)
+                {
+                    return NotFound();
+                }
+
+               
+                if (postVM.ImagenFile is null)
+                {
+                    var postMapper = _mapper.Map<Post>(postVM);
+
+                    postMapper.Status = 1;
+                    postMapper.IdUser = 1;
+                    postMapper.FechaPublicado = DateTime.Now;
+                    await _repository.Update(postMapper);
+
+                    return RedirectToAction("Index");
+                }
+
+               
+            }
+
+            return View(postVM);
         }
 
     }

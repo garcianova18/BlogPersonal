@@ -1,4 +1,4 @@
-﻿using Dominio.Models;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DTOs.DTO
 {
-    public class ListPostVM
+    public class EditPostVM
     {
-
         public int Id { get; set; }
         public string Titulo { get; set; }
 
@@ -19,9 +18,9 @@ namespace DTOs.DTO
 
         public string Imagen { get; set; }
 
+        public IFormFile ImagenFile { get; set; }
+        
         public int Status { get; set; }
-
-        public string IdCategoriaNavigationNombre { get; set; }
 
         public int IdCategoria { get; set; }
     }

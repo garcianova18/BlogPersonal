@@ -16,11 +16,15 @@
 
             @foreach (var item in Model)
             {
-               <div class="col-3 mb-5">
+               <div class="col-12 col-md-6 col-lg-4 mb-5">
 
                     <div class="card" >
                         <img src="/Imagenes/@item.Imagen" class="card-img-top" alt="..." style="height:250px">
                         <div class="card-body text-center">
+                           <div class="text-start">
+                                <p class="text-start bg-info d-inline-block p-1 text-white border rounded-3">@item.IdCategoriaNavigationNombre</p>
+                           </div>
+
                             <h5 class="card-title text-uppercase">@item.Titulo</h5>
                             <div class="card-text">
                                 @{
@@ -35,7 +39,7 @@
                                 }
                                    @text...                           
                             </div>
-                            <a asp-action="GetPost" asp-controller="Post" asp-route-id="@item.Id" class="btn btn-sm btn-primary mt-3">Leer Mas...</a>
+                            <a asp-action="Details" asp-controller="Post" asp-route-id="@item.Id" class="btn btn-sm btn-primary mt-3">Leer Mas...</a>
                             <p class="text-muted text-start mt-5">Creado @item.FechaPublicado.ToString("d")</p>
                         </div>
 
