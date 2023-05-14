@@ -13,7 +13,7 @@ namespace DTOs.DTO
       
         public string Descripcion { get; set; }
 
-        public IFormFile Imagen { get; set; }
+        public IFormFile ImagenFile { get; set; }
 
         [Required] 
         public int IdCategoria { get; set; }

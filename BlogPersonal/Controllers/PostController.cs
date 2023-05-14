@@ -3,6 +3,7 @@ using AutoMapper;
 using Dominio.Models;
 using DTOs.DTO;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 using Servicios.Repository;
 using Servicios.Servicices;
 
@@ -11,12 +12,12 @@ namespace BlogPersonal.Controllers
 {
     public class PostController : Controller
     {
-        private readonly IHostEnvironment environment;
+        private readonly IWebHostEnvironment environment;
         private readonly IMapper _mapper;
         private readonly IServicicesComboBox comboBox;
         private readonly IGuardarimagen guardarimagen;
         private readonly IRepositoryPost _repository;
-        public PostController(IRepositoryPost repository, IHostEnvironment environment, IMapper mapper, IServicicesComboBox comboBox, IGuardarimagen guardarimagen)
+        public PostController(IRepositoryPost repository,  IWebHostEnvironment environment, IMapper mapper, IServicicesComboBox comboBox, IGuardarimagen guardarimagen)
         {
             this.environment = environment;
             _mapper = mapper;
@@ -57,11 +58,11 @@ namespace BlogPersonal.Controllers
                 postMapper.IdUser = 1;
 
 
-                if (post.Imagen != null)
+                if (post.ImagenFile != null)
                 {
 
 
-                    postMapper.Imagen = await guardarimagen.GuardarImagenes(post);
+                    postMapper.Imagen = await guardarimagen.GuardarImagenes(post.ImagenFile);
 
 
                 }
@@ -127,26 +128,55 @@ namespace BlogPersonal.Controllers
             if (ModelState.IsValid)
             {
                
-               var post = await _repository.VerificarExiste(postVM.Id);
-                if (!post)
+               var postExiste = await _repository.VerificarExiste(postVM.Id);
+
+                if (!postExiste)
                 {
                     return NotFound();
                 }
 
-               
+                var buscarImagen = await _repository.GetById(postVM.Id);
+                Post postMapper = new Post();
+
                 if (postVM.ImagenFile is null)
                 {
-                    var postMapper = _mapper.Map<Post>(postVM);
+                   
+                    
+                     postMapper = _mapper.Map<Post>(postVM);
 
                     postMapper.Status = 1;
                     postMapper.IdUser = 1;
                     postMapper.FechaPublicado = DateTime.Now;
-                    await _repository.Update(postMapper);
+                    postMapper.Imagen = buscarImagen.Imagen; 
 
-                    return RedirectToAction("Index");
+                    
                 }
+                else
+                {
+                    //si se seleciono una imagen para actualizar Eliminamos la imagen anterior
 
-               
+                    var buscarRutaImg = environment.WebRootPath +"/imagenes/"+buscarImagen.Imagen;
+
+                    //si la ruta es valida eliminamos la imagen
+                    if (System.IO.File.Exists(buscarRutaImg))
+                    {
+                        System.IO.File.Delete(buscarRutaImg);
+
+                    }
+
+
+                    postMapper = _mapper.Map<Post>(postVM);
+
+                    postMapper.Status = 1;
+                    postMapper.IdUser = 1;
+                    postMapper.FechaPublicado= DateTime.Now;
+                    postMapper.Imagen = await guardarimagen.GuardarImagenes(postVM.ImagenFile);
+
+                }
+                await _repository.Update(postMapper);
+
+                return RedirectToAction("Index");
+
             }
 
             return View(postVM);

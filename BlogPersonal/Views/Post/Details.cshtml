@@ -15,14 +15,10 @@
     <div class="row d-flex justify-content-around ">
 
        
+        <div class="col-12 col-md-8  border boder-1 g-0 px-3">
 
-
-          
-       
-        <div class="col-12 col-md-8  border boder-1 g-0">
-
-                <div>
-                    <img src="/Imagenes/@Model.Imagen" class="card-img-top" alt="...">
+                <div class="texc">
+                <img src="/Imagenes/@Model.Imagen" class="card-img-top" alt="..." style="max-height:500px">
                 </div>
 
                 <div class="mt-2 ">
@@ -30,18 +26,18 @@
                     <p class=" bg-info d-inline-block p-1 text-white border rounded-3">@Model.IdCategoriaNavigationNombre</p>
                     <a asp-action="Edit" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-outline-warning float-end  ">Editar</a>
                 </div>
+            <p class="text-muted ">@Model.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
 
                 <h1>@Model.Titulo</h1>
-                <div>
-                    @{
-                        string text = Model.Descripcion.Replace("&nbsp;", string.Empty);
+                <div >
+                    <p >
+                         @Html.Raw(Model.Descripcion)
+                    </p>
 
-                        text = Regex.Replace(text, "<.*?>", string.Empty);
-                    }
-                    @text
                 </div>
-            
 
+
+            <p class="text-muted ">Autor</p>
         </div>
 
         <div class="col-12 col-md-3 border border-2">

@@ -5,25 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs.DTO;
+using Microsoft.AspNetCore.Http;
 
 namespace Servicios.Servicices
 {
 
     public interface IGuardarimagen
     {
-        Task<string> GuardarImagenes(CreatePostVM post);
+        Task<string> GuardarImagenes(IFormFile im);
     }
     public class Guardarimagen:IGuardarimagen
     {
 
 
-        public async Task< string >GuardarImagenes(CreatePostVM post)
+        public Guardarimagen()
+        {
+         
+        }
+
+        public async Task< string >GuardarImagenes(IFormFile img )
         {
 
             //obtener nombre y extension del File para gardar como string en Db
-
-            string FileName = Path.GetFileNameWithoutExtension(post.Imagen.FileName);
-            string Extension = Path.GetExtension(post.Imagen.FileName);
+            
+            string FileName = Path.GetFileNameWithoutExtension(img.FileName);
+            string Extension = Path.GetExtension(img.FileName);
             string ImagenName = FileName + "_" + Guid.NewGuid() + Extension;
 
             //Guadar imagen en directorio wwwroot/imagenes
@@ -32,7 +38,7 @@ namespace Servicios.Servicices
 
             using (FileStream stream = new FileStream(Ruta, FileMode.Create))
             {
-                await post.Imagen.CopyToAsync(stream);
+                await img.CopyToAsync(stream);
             }
 
             return ImagenName;

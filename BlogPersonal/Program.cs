@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BlogPersonalContext>(op=>op.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
-builder.Services.AddTransient(typeof(IRepositoryGeneric<>), typeof(RepositoryGeneric<>));
+builder.Services.AddScoped(typeof(IRepositoryGeneric<>), typeof(RepositoryGeneric<>));
 
 
 builder.Services.AddAutoMapper(typeof(Program));

@@ -37,9 +37,9 @@ namespace Servicios.Repository
         {
 
 
-            var post = await  _context.Posts.Include(c=> c.IdCategoriaNavigation).ToListAsync();
+            var post = await _context.Posts.Include(c => c.IdCategoriaNavigation).ToListAsync();
 
-           
+
 
             return post;
 
@@ -54,7 +54,7 @@ namespace Servicios.Repository
         public async Task<Post> GetById(int id)
         {
 
-          return await _context.Posts.FindAsync(id);
+          return await _context.Posts.AsNoTracking().FirstOrDefaultAsync(p=> p.Id == id);
         }
 
         public async Task<bool> VerificarExiste(int id)
