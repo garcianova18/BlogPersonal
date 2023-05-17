@@ -12,6 +12,7 @@ namespace BlogPersonal
             CreateMap<CreatePostVM, Post>().ReverseMap();
             CreateMap<ListPostVM, Post>().ReverseMap();
             CreateMap<EditPostVM, Post>().ReverseMap();
+            CreateMap<DetailsPostVM, Post>().ReverseMap();
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿@using System.Text.RegularExpressions;
-@model DTOs.DTO.ListPostVM
+﻿
+@model DTOs.DTO.DetailsPostVM
 @{
     ViewData["Title"] = "GetPost";
     Layout = "~/Views/Shared/_Layout.cshtml";
+  
 }
 
 
@@ -15,34 +16,49 @@
     <div class="row d-flex justify-content-around ">
 
        
-        <div class="col-12 col-md-8  border boder-1 g-0 px-3">
+        <div class="col-12 col-md-8  border boder-1 g-0 shadow">
 
-                <div class="texc">
-                <img src="/Imagenes/@Model.Imagen" class="card-img-top" alt="..." style="max-height:500px">
-                </div>
+                
+                <img src="/Imagenes/@Model.Imagen" class="card-img-top  img-fluid" alt="..." @*style="max-height:500px*@ />
 
-                <div class="mt-2 ">
+
+              
+
+              <div class=" px-3">
+
+                  <div class="mt-2 ">
 
                     <p class=" bg-info d-inline-block p-1 text-white border rounded-3">@Model.IdCategoriaNavigationNombre</p>
-                    <a asp-action="Edit" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-outline-warning float-end  ">Editar</a>
-                </div>
-            <p class="text-muted ">@Model.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
+                  
+                    <div class="btn-group float-end">
 
-                <h1>@Model.Titulo</h1>
-                <div >
-                    <p >
-                         @Html.Raw(Model.Descripcion)
-                    </p>
+                        <a asp-action="Edit" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-warning  ">Edit</a>
+                        <a asp-action="Delete" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-danger ">delete</a>
+                   </div>
 
                 </div>
 
 
-            <p class="text-muted ">Autor</p>
+
+               
+                <p class="text-muted ">@Model.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
+
+                <h1 class="text-capitalize ">@Model.Titulo</h1>
+
+                <p> @Html.Raw(Model.Descripcion)</p>
+
+
+                <p class="text-muted ">Autor</p>
+
+
+              </div>
+
+
+
         </div>
 
-        <div class="col-12 col-md-3 border border-2">
 
-        </div>
+       @await Html.PartialAsync("_Articulos", model:Model.ListPostVMs);
 
     </div>
 

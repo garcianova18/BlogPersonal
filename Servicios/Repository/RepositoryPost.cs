@@ -11,6 +11,7 @@ namespace Servicios.Repository
     public interface IRepositoryPost
     {
         Task Create(Post post);
+        Task Delete(Post post);
         Task<IEnumerable<Post>> GetAll();
         Task<Post> GetById(int id);
         Task<Post> GetPost(int? id);
@@ -70,6 +71,13 @@ namespace Servicios.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task Delete(Post post)
+        {
+
+            _context.Remove(post);
+            await _context.SaveChangesAsync();
+
+        }
       
     }
 }

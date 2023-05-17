@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DTOs.DTO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 
 namespace Servicios.Servicices
 {

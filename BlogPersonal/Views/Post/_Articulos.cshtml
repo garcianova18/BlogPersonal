@@ -1,0 +1,31 @@
+﻿@model List<DTOs.DTO.ListPostVM>
+
+
+
+
+<div class="col-12 col-md-3 ">
+
+    <div class="border border-2 py-3 px-2">
+
+
+         <h6 class="text-center">Articulos Recientes</h6>
+
+        @foreach(var items in Model.Take(10)){
+
+
+
+        <a class="text-decoration-none" asp-action="Details" asp-controller="Post" asp-route-id="@items.Id">
+
+                <img src="/Imagenes/@items.Imagen" class="img-thumbnail">
+
+                <p class="text-dark ">@items.Titulo</p>
+
+            </a>
+
+
+        }
+
+
+    </div>
+
+ </div>
