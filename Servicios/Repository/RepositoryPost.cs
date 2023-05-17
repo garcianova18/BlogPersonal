@@ -15,6 +15,7 @@ namespace Servicios.Repository
         Task<IEnumerable<Post>> GetAll();
         Task<Post> GetById(int id);
         Task<Post> GetPost(int? id);
+        int GetUsuario();
         Task Update(Post post);
         Task<bool> VerificarExiste(int id);
     }
@@ -29,7 +30,8 @@ namespace Servicios.Repository
         public async Task<Post> GetPost(int? id)
         {
 
-            var post = await _context.Posts.Include(c=>c.IdCategoriaNavigation).FirstOrDefaultAsync(x=>x.Id ==id);
+            var post = await _context.Posts.Include(c=>c.IdCategoriaNavigation)
+                .Include(u=>u.IdUserNavigation).FirstOrDefaultAsync(x=>x.Id ==id);
 
             return post;
         }
@@ -38,7 +40,7 @@ namespace Servicios.Repository
         {
 
 
-            var post = await _context.Posts.Include(c => c.IdCategoriaNavigation).ToListAsync();
+            var post = await _context.Posts.Include(c => c.IdCategoriaNavigation).Include(u=> u.IdUserNavigation).ToListAsync();
 
 
 
@@ -77,6 +79,14 @@ namespace Servicios.Repository
             _context.Remove(post);
             await _context.SaveChangesAsync();
 
+        }
+
+        public int GetUsuario()
+        {
+
+
+
+            return 1;
         }
       
     }

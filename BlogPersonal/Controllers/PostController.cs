@@ -56,7 +56,7 @@ namespace BlogPersonal.Controllers
 
                 postMapper.Status = 1;
                 postMapper.FechaPublicado = DateTime.Now;
-                postMapper.IdUser = 1;
+                postMapper.IdUser = _repository.GetUsuario();
 
 
                 if (post.ImagenFile != null)
@@ -85,10 +85,13 @@ namespace BlogPersonal.Controllers
         {
             
 
+
             if (id is null || id ==0)
             {
                 return NotFound();
             }
+
+            
 
             var post = await _repository.GetPost(id);
             var PostMapper = _mapper.Map<DetailsPostVM>(post);
@@ -163,7 +166,7 @@ namespace BlogPersonal.Controllers
                     postMapper = _mapper.Map<Post>(postVM);
 
                     postMapper.Status = 1;
-                    postMapper.IdUser = 1;
+                    postMapper.IdUser = _repository.GetUsuario();
                     postMapper.FechaPublicado = DateTime.Now;
                     postMapper.Imagen = await guardarimagen.GuardarImagenes(postVM.ImagenFile);
 

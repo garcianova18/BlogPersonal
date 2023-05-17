@@ -19,7 +19,7 @@
         <div class="col-12 col-md-8  border boder-1 g-0 shadow">
 
                 
-                <img src="/Imagenes/@Model.Imagen" class="card-img-top  img-fluid" alt="..." @*style="max-height:500px*@ />
+                <img src="/Imagenes/@Model.Imagen" class="card-img-top  img-fluid" alt="..." style="max-height:500px" />
 
 
               
@@ -48,7 +48,7 @@
                 <p> @Html.Raw(Model.Descripcion)</p>
 
 
-                <p class="text-muted ">Autor</p>
+                <p class="text-muted ">Autor <span class="text-primary">@Model.IdUserNavigationUserName</span></p>
 
 
               </div>

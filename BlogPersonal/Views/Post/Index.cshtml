@@ -43,7 +43,8 @@
                                    @text...                           
                             </div>
                             <a asp-action="Details" asp-controller="Post" asp-route-id="@item.Id" class="btn btn-sm btn-primary mt-3">Leer Mas...</a>
-                            <p class="text-muted text-start mt-5">Creado @item.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
+                            <p class="text-muted text-start  m-0">Autor <span class="text-primary">@item.IdUserNavigationUserName</span></p>
+                            <p class="text-muted text-start  m-0">Creado @item.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
                         </div>
 
                     </div>
