@@ -26,6 +26,9 @@ namespace DTOs.DTO
         public string IdUserNavigationUserName { get; set; }
 
         public int IdCategoria { get; set; }
+
         public int IdUser { get; set; }
+
+        public ICollection<Comentario> Comentarios { get; set; }
     }
 }

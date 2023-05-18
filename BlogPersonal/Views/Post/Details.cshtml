@@ -13,7 +13,7 @@
     
 
 
-    <div class="row d-flex justify-content-around ">
+    <div class="row  ">
 
        
         <div class="col-12 col-md-8  border boder-1 g-0 shadow">
@@ -57,12 +57,43 @@
 
         </div>
 
+        @* aqui pintamos el listado de los articulos relacionados*@
 
-       @await Html.PartialAsync("_Articulos", model:Model.ListPostVMs);
+        @await Html.PartialAsync("_Articulos", model:Model.ListPostVMs);
+
+        
+
+           
+
+     
+
 
     </div>
 
-   
 
+    <div class="row d-flex justify-content-start">
+
+        <div class="col-12  col-md-8 border border-1 my-3 pt-5">
+
+
+            @if (Model.Comentarios.Count() > 0)
+            {
+                @foreach (var item in Model.Comentarios)
+                {
+                        <h6 class="">Autor @item.IdUser</h6>
+                    <p class="py-4 border border-1">@item.Descripcion</p>
+                }
+            }
+            else
+            {
+               
+                <p>Sea el primero en dejar un comentario</p>
+
+            }
+
+
+        </div>
+
+    </div>
 
 </div>

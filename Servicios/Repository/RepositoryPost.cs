@@ -31,7 +31,7 @@ namespace Servicios.Repository
         {
 
             var post = await _context.Posts.Include(c=>c.IdCategoriaNavigation)
-                .Include(u=>u.IdUserNavigation).FirstOrDefaultAsync(x=>x.Id ==id);
+                .Include(u=>u.IdUserNavigation).Include(coment=> coment.Comentarios).FirstOrDefaultAsync(x=>x.Id ==id);
 
             return post;
         }
