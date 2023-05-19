@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Imagenes\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\Persistencia\Persistencia.csproj" />
     <ProjectReference Include="..\Servicios\Servicios.csproj" />
