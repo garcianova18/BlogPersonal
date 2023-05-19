@@ -1,4 +1,4 @@
-﻿
+﻿using Dominio.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +30,9 @@ namespace DTOs.DTO
         public int IdUser { get; set; }
 
         public ICollection<Comentario> Comentarios { get; set; }
+
+       
+
+
     }
 }

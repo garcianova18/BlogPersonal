@@ -212,11 +212,13 @@ namespace BlogPersonal.Controllers
 
 
             //var ruta = environment.WebRootPath + "Imagenes" + post.Imagen;
-            var ruta = environment.WebRootPath + Path.Combine("Imagenes", post.Imagen);
 
-            if (System.IO.File.Exists(ruta))
+            var ruta= environment.WebRootPath + "/Imagenes";
+            var rutarutaNameImg = Path.Combine(ruta, post.Imagen);
+
+            if (System.IO.File.Exists(rutarutaNameImg))
             {
-                System.IO.File.Delete(ruta);
+                System.IO.File.Delete(rutarutaNameImg);
             }
 
            
