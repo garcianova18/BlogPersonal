@@ -204,10 +204,22 @@ namespace BlogPersonal.Controllers
             if (post is null)
             {
                 return NotFound();
+
             }
 
 
-           await _repository.Delete(post);
+            //var ruta = environment.WebRootPath + "Imagenes" + post.Imagen;
+            var ruta = environment.WebRootPath + Path.Combine("Imagenes", post.Imagen);
+
+            if (System.IO.File.Exists(ruta))
+            {
+                System.IO.File.Delete(ruta);
+            }
+
+           
+
+
+            await _repository.Delete(post);
 
             return RedirectToAction(nameof(Index));
 
