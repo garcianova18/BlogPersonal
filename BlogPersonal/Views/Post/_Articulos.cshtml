@@ -16,7 +16,23 @@
 
         <a class="text-decoration-none" asp-action="Details" asp-controller="Post" asp-route-id="@items.Id">
 
-                <img src="/Imagenes/@items.Imagen" class="img-thumbnail">
+                @if (items.Imagen is not null)
+                {
+                    <img src="/Imagenes/@items.Imagen" class="img-thumbnail" >
+
+                }
+                else
+                {
+
+                    <div class="bg-primary w-100 d-flex justify-content-center align-items-center" style="height:180px">
+
+                        <p class="text-black-50">Sube una imagen</p>
+
+                    </div>
+
+
+                }
+                
 
                 <p class="text-dark ">@items.Titulo</p>
 

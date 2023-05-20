@@ -19,8 +19,6 @@ namespace DTOs.DTO
 
         public string Imagen { get; set; }
 
-        public int Status { get; set; }
-
         public string IdCategoriaNavigationNombre { get; set; }
 
         public string IdUserNavigationUserName { get; set; }
@@ -29,9 +27,10 @@ namespace DTOs.DTO
 
         public int IdUser { get; set; }
 
-        public ICollection<Comentario> Comentarios { get; set; }
+        //Porpiedad para mostrar el listado de Comentarios que pertenecen a un Post en la vista Detalils
+        public List<Comentario> ListComentarios { get; set; }
 
-       
+
 
 
     }

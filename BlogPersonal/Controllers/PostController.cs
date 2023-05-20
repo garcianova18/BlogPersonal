@@ -94,11 +94,18 @@ namespace BlogPersonal.Controllers
             
 
             var post = await _repository.GetPost(id);
+  
             var PostMapper = _mapper.Map<DetailsPostVM>(post);
+           
+        
+          
+
             if (post == null)
             {
                 return NotFound();
             }
+
+            //obtenemos el listado de POSt para mostrarlo como articulos relacionados
             var ListPost = await _repository.GetAll();
 
             var ListPostMapper = _mapper.Map<List<ListPostVM>>(ListPost);
@@ -210,26 +217,83 @@ namespace BlogPersonal.Controllers
 
             }
 
-
-            //var ruta = environment.WebRootPath + "Imagenes" + post.Imagen;
-
-            var ruta= environment.WebRootPath + "/Imagenes";
-            var rutarutaNameImg = Path.Combine(ruta, post.Imagen);
-
-            if (System.IO.File.Exists(rutarutaNameImg))
+            //si existe una imagen la vamos a eliminar 
+            if (post.Imagen is not null)
             {
-                System.IO.File.Delete(rutarutaNameImg);
+                var ruta = environment.WebRootPath + "/Imagenes";
+                var rutarutaNameImg = Path.Combine(ruta, post.Imagen);
+
+                if (System.IO.File.Exists(rutarutaNameImg))
+                {
+                    System.IO.File.Delete(rutarutaNameImg);
+                }
             }
 
-           
+            try
+            {
+                await _repository.Delete(post);
+            }
+            catch (Exception)
+            {
 
-
-            await _repository.Delete(post);
+                throw;
+            }
+            
+         
 
             return RedirectToAction(nameof(Index));
 
 
         }
-       
+
+        [HttpPost, ActionName("Details")]           
+        public async Task<IActionResult>AddComent(DetailsPostVM comentatio, int? id)
+        {
+            if (id is null || id ==0)
+            {
+                NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var coment = new Comentario();
+
+                coment.Descripcion = comentatio.Comentario.Descripcion;
+                coment.IdPost = id.GetValueOrDefault();
+                coment.IdUser = _repository.GetUsuario();
+                coment.FechaPublicado = DateTime.Now;
+                coment.Status = 1;
+
+                await _repository.addComent(coment);
+
+                return RedirectToAction(nameof(Details));
+
+            }
+            
+            //como no traemos los datos del detalles lo volvemos a buscar para mostrarlo nuevamente
+            var post = await _repository.GetPost(id);
+
+            var PostMapper = _mapper.Map<DetailsPostVM>(post);
+
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            //obtenemos el listado de POSt para mostrarlo como articulos relacionados
+            var ListPost = await _repository.GetAll();
+
+            var ListPostMapper = _mapper.Map<List<ListPostVM>>(ListPost);
+
+            PostMapper.ListPostVMs = ListPostMapper;
+
+
+            return View(nameof(Details), PostMapper);
+
+
+        }
+
+
     }
 }

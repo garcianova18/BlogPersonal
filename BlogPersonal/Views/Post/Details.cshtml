@@ -1,99 +1,153 @@
-﻿
-@model DTOs.DTO.DetailsPostVM
+﻿@model DTOs.DTO.DetailsPostVM
 @{
     ViewData["Title"] = "GetPost";
     Layout = "~/Views/Shared/_Layout.cshtml";
-  
+
 }
 
 
 
 <div class="container">
 
-    
 
 
-    <div class="row  ">
 
-       
-        <div class="col-12 col-md-8  border boder-1 g-0 shadow ">
+    <div class="row justify-content-between ">
 
-                
-                <img src="/Imagenes/@Model.Imagen" class="card-img-top  img-fluid" alt="..." style="max-height:500px" />
+        
+       @* Seccion de detalles de los POST, Crear Comentarios y Mostrar Comentarios
+        *@
+            <div class="col-12 col-md-8   ">
 
 
-              
+                @* ----------Seccion de Detalles del articulos------*@
 
-              <div class=" px-3">
+                <div class="row">
 
-                  <div class="mt-2 ">
+                    <div class="col-12 border boder-1 g-0 shadow mb-5">
 
-                    <p class=" bg-info d-inline-block p-1 text-white border rounded-3">@Model.IdCategoriaNavigationNombre</p>
-                  
-                    <div class="btn-group float-end">
+                        @if (Model.Imagen is not null)
+                        {
+                            <img src="/Imagenes/@Model.Imagen" class="card-img-top  img-fluid" alt="..." style="max-height:500px" />
 
-                        <a asp-action="Edit" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-warning  ">Edit</a>
-                        <a asp-action="Delete" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-danger ">delete</a>
-                   </div>
+                        }
+                        else
+                        {
+
+                            <div class="bg-primary w-100 d-flex justify-content-center align-items-center" style="height:250px">
+
+                                <p class="text-black-50">Sube una imagen</p>
+
+                            </div>
+
+
+                        }
+
+                        <div class=" px-3">
+
+                            <div class="mt-2 ">
+
+                                <p class=" bg-info d-inline-block p-1 text-white border rounded-3">@Model.IdCategoriaNavigationNombre</p>
+
+                                <div class="btn-group float-end">
+
+                                    <a asp-action="Edit" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-warning  ">Edit</a>
+                                    <a asp-action="Delete" asp-controller="Post" asp-route-id="@Model.Id" class="btn btn-danger ">delete</a>
+                                </div>
+
+                            </div>
+
+
+                            <p class="text-muted ">@Model.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
+
+                            <h1 class="text-capitalize ">@Model.Titulo</h1>
+
+                            <p> @Html.Raw(Model.Descripcion)</p>
+
+
+                            <p class="text-muted ">Autor <span class="text-primary">@Model.IdUserNavigationUserName</span></p>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @* ----------Seccion de Comentarios del artuculo Crear y Mostrar------*@
+
+                <div class="row">
+
+                    <div class="col-12 border boder-1 g-0 shadow  px-3">
+
+
+                        <p> @Model.ListComentarios.Count() Comentarios</p>
+
+
+                        @* ---- Crear un nuevo Comentario ----------------*@
+
+                        <form asp-controller="Post" asp-action="Details" method="post" class="mb-5 ">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <input asp-for="Comentario.Descripcion" class="form-control py-3" placeholder="Agregar comentario" />
+                            <span asp-validation-for="Comentario.Descripcion" class="text-danger"></span>
+
+                            <input type="submit" class="btn btn-sm btn-success float-end  my-2" value="Enviar">
+
+                        </form>
+
+
+                        @* -----Mostrar todos los Comentarios de un POST------------*@
+
+                        @if (Model.ListComentarios is not null)
+                        {
+                            @if (Model.ListComentarios.Count() > 0)
+                            {
+                                @foreach (var item in Model.ListComentarios.OrderByDescending(f => f.FechaPublicado))
+                                {
+                                    <div class="border border-1 px-3 mb-3 rounded-2">
+
+                                        <h6 class="">Autor @item.IdUserNavigation.UserName</h6>
+                                        <p>@item.Descripcion</p>
+                                        <p class="text-muted">@item.FechaPublicado.ToString("d")</p>
+                                    </div>
+                                }
+                            }
+                        }
+
+
+
+
+
+                    </div>
 
                 </div>
 
 
 
-               
-                <p class="text-muted ">@Model.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
+            </div>
 
-                <h1 class="text-capitalize ">@Model.Titulo</h1>
-
-                <p> @Html.Raw(Model.Descripcion)</p>
-
-
-                <p class="text-muted ">Autor <span class="text-primary">@Model.IdUserNavigationUserName</span></p>
-
-
-              </div>
-
-
-
-        </div>
-
-        @* aqui pintamos el listado de los articulos relacionados*@
+        
+     
+        @* Seccion del listado de los articulos relacionados*@
 
         @await Html.PartialAsync("_Articulos", model:Model.ListPostVMs);
 
-        
-
-           
-
-     
 
 
     </div>
 
-
-    <div class="row d-flex justify-content-start">
-
-        <div class="col-12  col-md-8 border border-1 my-3 pt-5">
-
-
-            @if (Model.Comentarios.Count() > 0)
-            {
-                @foreach (var item in Model.Comentarios)
-                {
-                        <h6 class="">Autor @item.IdUser</h6>
-                    <p class="py-4 border border-1">@item.Descripcion</p>
-                }
-            }
-            else
-            {
-               
-                <p>Sea el primero en dejar un comentario</p>
-
-            }
-
-
-        </div>
-
-    </div>
-
+   
 </div>
+
+ @section Scripts{
+
+
+    @*@{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+     }*@
+
+   @* <partial name="_ValidationScriptsPartial.cshtml" />*@
+ } 
+ 
+    

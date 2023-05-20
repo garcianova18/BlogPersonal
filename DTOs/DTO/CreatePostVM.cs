@@ -8,14 +8,15 @@ namespace DTOs.DTO
     public class CreatePostVM
     {
 
-        [Required]
-        public string Titulo { get; set; } = null!;
-      
+        [Required (ErrorMessage ="El Titulo es obligatorio")]
+        public string Titulo { get; set; }
+
+        [Required(ErrorMessage = "La descripcion es obligatoria")]
         public string Descripcion { get; set; }
 
         public IFormFile ImagenFile { get; set; }
 
-        [Required] 
+        [Required(ErrorMessage = "Debes elegir una Categorio")] 
         public int IdCategoria { get; set; }
 
 

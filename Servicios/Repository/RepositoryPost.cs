@@ -10,6 +10,7 @@ namespace Servicios.Repository
 
     public interface IRepositoryPost
     {
+        Task addComent(Comentario comentario);
         Task Create(Post post);
         Task Delete(Post post);
         Task<IEnumerable<Post>> GetAll();
@@ -87,6 +88,14 @@ namespace Servicios.Repository
 
 
             return 1;
+        }
+
+        public async Task addComent(Comentario comentario)
+        {
+
+            _context.Add(comentario);
+
+            await _context.SaveChangesAsync();
         }
       
     }

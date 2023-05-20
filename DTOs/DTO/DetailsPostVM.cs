@@ -1,4 +1,5 @@
 ﻿
+using Dominio.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace DTOs.DTO
     {
         public List<ListPostVM> ListPostVMs { get; set;}
 
-       
+
+        //Propiedad para crear un comentario
+        public CrearComentarioVM Comentario { get; set; }
+
+
+        
     }
 }

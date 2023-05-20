@@ -46,7 +46,7 @@ public partial class BlogPersonalContext : DbContext
 
             entity.HasOne(d => d.IdPostNavigation).WithMany(p => p.Comentarios)
                 .HasForeignKey(d => d.IdPost)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Comentario_Post");
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Comentarios)
