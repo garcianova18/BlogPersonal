@@ -31,6 +31,11 @@ namespace DTOs.DTO
         public List<Comentario> ListComentarios { get; set; }
 
 
+        //propiedad para mostrar el listado de Proyectos
+
+        public List<Proyectos> ListProyectos { get;set; }
+
+
 
 
     }

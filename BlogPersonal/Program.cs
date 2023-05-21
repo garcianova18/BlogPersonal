@@ -1,4 +1,5 @@
 using BlogPersonal.Models;
+using DTOs.DTO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Persistencia.Context;
@@ -19,6 +20,8 @@ builder.Services.AddScoped<IServicicesComboBox, ServicicesComboBox>();
 builder.Services.AddScoped<IGuardarimagen, Guardarimagen>();
 
 builder.Services.AddScoped<IRepositoryPost, RepositoryPost>();
+
+builder.Services.AddTransient<IServicioProyectos, ServicioProyectos>();
 
 var app = builder.Build();
 
