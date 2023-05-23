@@ -1,12 +1,99 @@
 ﻿@using System.Text.RegularExpressions;
+@using DTOs.DTO;
 @model IEnumerable<DTOs.DTO.ListPostVM>
 @{
+    ViewData["Title"] = "Index";
+
+    List<Proyectos> proyectos;
+
+    proyectos = ViewBag.ListadoProyectos;
+
+
+
+    
+
+    
     ViewData["Title"] = "Sitio del Ing. Wilson Garcia";
 }
 
 
 
 <div class="container">
+
+    <div class="row ">
+
+
+       <div class="col-12 border border-1 rounded-2 py-5">
+
+            <div class="row justify-content-center text-center text-primary ">
+
+                <div class="col-4 border border-end-0 p-3 shadow ">
+
+                   <h2>Backend</h2>
+                    <ul class="list-unstyled">
+                        <li>C#</li>
+                        <li>ASP.net Core MVC</li>
+                        <li>SQL SErver</li>
+                        <li>PL/SQL</li>
+                        <li>Entity Framework</li>
+                        <li>LINQ</li>
+                     
+                    </ul>
+
+               </div>
+
+                <div class="col-4 border border-start-0  p-3 shadow ">
+
+                    <h2>Frontend</h2>
+                    <ul class="list-unstyled">
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>Java Script</li>
+                        <li>Bootstrap</li>
+                        <li>Jquery</li>
+                        <li>React</li>
+
+                    </ul>
+
+               </div>
+
+           </div>
+
+
+       </div>
+
+       <div class="col-12 py-5">
+
+           
+           <div class="row">
+
+                <h2 class="text-center mb-5">Proyectos Recientes</h2>
+
+                @foreach (var item in proyectos)
+                {
+                    <div class="col-12 col-md-4">
+
+                        <div class="card text-center shadow">
+                            <img src="~/Imagenes/proyectos/AgendaTelefonica.jpg" alt="..." height="200" >
+                            <div class="card-body">
+
+                                <h5 class="card-title text-dark">@item.Titulo</h5>
+
+                                <p class="card-text">@item.Descripcion</p>
+
+                                <a href="@item.Url" class="btn btn-primary">Ver Demo</a>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+             
+           </div>
+
+
+       </div>
+
 
     <div class="row">
 
