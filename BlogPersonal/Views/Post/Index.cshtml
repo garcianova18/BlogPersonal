@@ -1,19 +1,43 @@
 ﻿@using System.Text.RegularExpressions;
 @model IEnumerable<DTOs.DTO.ListPostVM>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sitio del Ing. Wilson Garcia";
 }
 
-<h1 class="text-center mb-5">Blog</h1>
+
 
 <div class="container">
 
     <div class="row">
+
+
+        <div class="col-12 text-center mb-5 mt-2 text-white py-5 seccion_Presentacion rounded-2">
+
+            <img src="~/Imagenes/ing_wilson.jpg" class="img-thumbnail rounded-circle"/>
+            <h1 class=" mt-5">I,M Wilson Garcia Nova</h1>
+            <h5>Ingeniero de Sistema y Computacion</h5>
+
+            <a href="~/archivos/Ing. Wilson garcia nova.pdf" class="btn btn-outline-warning mt-3 descargar_curriculum ">
+
+                <span class="pe-2">Descargar CV </span>
+                <i class="fa-solid fa-file-arrow-down fa-beat-fade"></i> 
+                
+            </a>
+
+            <div class="d-flex justify-content-center mt-3 mt-lg-0 justify-content-lg-end botones ">
+
+                <a href="https://www.linkedin.com/in/wilson-garcia-nova-733439123/">  <i class="fa-brands fa-linkedin-in"></i>  </a>
+
+                <a href="https://github.com/garcianova18">  <i class="fa-brands fa-github"></i>  </a>
+
+               
+            </div>
+        </div>
+      
+
         @if (Model.Count() > 0)
         {
     
-      
-
             @foreach (var item in Model.OrderByDescending(f=> f.FechaPublicado))
             {
                <div class="col-12 col-md-6 col-lg-4 mb-5">

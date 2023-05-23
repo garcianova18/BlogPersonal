@@ -1,6 +1,6 @@
 ﻿@model DTOs.DTO.DetailsPostVM
 @{
-    ViewData["Title"] = "GetPost";
+    ViewData["Title"] = Model.Titulo;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -12,7 +12,7 @@
 
 
 
-    <div class="row justify-content-lg-evenly  ">
+    <div class="row justify-content-evenly  ">
 
         
        @* Seccion de detalles de los POST, Crear Comentarios y Mostrar Comentarios
@@ -139,7 +139,7 @@
      
         @* Seccion del listado de los articulos relacionados*@
 
-        @await Html.PartialAsync("_Articulos", model:Model.ListPostVMs);
+        @await Html.PartialAsync("_ArticulosRelacionados", model:Model.ListPostVMs);
 
 
 

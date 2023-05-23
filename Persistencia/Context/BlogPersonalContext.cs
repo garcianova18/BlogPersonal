@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Dominio.Models;
 
+
 namespace Persistencia.Context;
 
-public partial class BlogPersonalContext : DbContext
+public partial class BlogPersonalContext: DbContext
 {
 
 

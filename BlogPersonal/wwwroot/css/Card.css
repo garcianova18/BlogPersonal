@@ -6,3 +6,59 @@
         opacity: 0.8;
         transform: translateY(-3%)
     }
+
+.seccion_Presentacion {
+    background-image: linear-gradient(to top, #3573D8 0%, #1E2F99 80%);
+
+   
+}
+
+ .seccion_Presentacion h5 {
+        font-size: 1rem;
+ }
+
+    .seccion_Presentacion img {
+        width: 180px;
+       
+    }
+.seccion_Presentacion .descargar_curriculum{
+
+    font-size: 0.8rem
+}
+
+@media screen and (min-width: 768px) {
+    .seccion_Presentacion h1 {
+        font-size: 3.5rem;
+    }
+    .seccion_Presentacion h5 {
+        font-size: 1.5rem;
+    }
+
+    .seccion_Presentacion img {
+        width: auto;
+    }
+    .seccion_Presentacion .descargar_curriculum {
+        font-size: 1.3rem
+    }
+
+}
+
+.botones a {
+    width: 40px;
+    height: 40px;
+    background: #314652;
+    line-height: 40px;
+    color: #ffff;
+    border-radius: 50%;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.5s ease-in-out;
+    margin-right: 4px;
+}
+
+.botones a:hover{
+
+    transform: scale(1.1);
+}
+
+
