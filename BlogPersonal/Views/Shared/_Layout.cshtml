@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Post" asp-action="Index">
+                <a class="navbar-brand" asp-area="" asp-controller="Portafolio" asp-action="Index">
 
                     <img src="~/Imagenes/ing_wilson.jpg" class="img-fluid rounded-circle" width="50" height="50"/>
 
@@ -24,14 +24,18 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="navbar-collapse collapse d-md-flex justify-content-md-end ">
+
+
+                    <ul class="navbar-nav text-center  ">
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" title="Mantenimiento" aria-expanded="false">
 
                                 <i class="fa-solid fa-gear fa-xl icono_herramienta"></i>
-                            </a>    
+                            </a> 
+                            
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li> <a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="Create">Create New</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -39,11 +43,26 @@
                             </ul>
                         </li>
 
+                      
                         <li class="nav-item">
-                           
 
+                            <a class="nav-link text-primary " asp-controller="Post" asp-action="Index"> Visitar Blog</a>
+                            
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link text-primary " href="#Habilidades"> Habilidades</a>
+                            
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link text-primary" href="#Proyectos"> Proyectos</a>
                         </li>
                     </ul>
+                            
+                       
+                       
+                        
                 </div>
             </div>
         </nav>

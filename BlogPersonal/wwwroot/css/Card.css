@@ -17,17 +17,26 @@
         font-size: 1rem;
  }
 
-    .seccion_Presentacion img {
+.seccion_Presentacion img {
         width: 180px;
        
-    }
+}
+
 .seccion_Presentacion .descargar_curriculum{
 
     font-size: 0.8rem
 }
 
-@media screen and (min-width: 768px) {
-    .seccion_Presentacion h1 {
+.seccion_habilidades{
+
+    background-color: rgb(128, 128, 128, 0.1)
+
+}
+
+
+
+    @media screen and (min-width: 768px) {
+        .seccion_Presentacion h1 {
         font-size: 3.5rem;
     }
     .seccion_Presentacion h5 {
@@ -52,7 +61,7 @@
     border-radius: 50%;
     font-size: 18px;
     text-decoration: none;
-    transition: 0.5s ease-in-out;
+    transition: 0.3s ease-in-out;
     margin-right: 4px;
 }
 

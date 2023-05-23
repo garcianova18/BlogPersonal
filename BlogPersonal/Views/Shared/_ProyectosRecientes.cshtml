@@ -1,0 +1,37 @@
+﻿
+
+<section id="Proyectos">
+
+    <div class="col-12 py-5">
+
+
+        <div class="row">
+
+            <h2 class="text-center mb-5 text-primary">Proyectos Recientes</h2>
+
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-md-4">
+
+                    <div class="card text-center shadow">
+                        <img src="~/Imagenes/proyectos/AgendaTelefonica.jpg" alt="..." height="200">
+                        <div class="card-body">
+
+                            <h5 class="card-title text-dark">@item.Titulo</h5>
+
+                            <p class="card-text">@item.Descripcion</p>
+
+                            <a href="@item.Url" class="btn btn-primary">Ver Demo</a>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+
+
+    </div>
+
+</section>
