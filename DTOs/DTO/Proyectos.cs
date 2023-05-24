@@ -16,5 +16,7 @@ namespace DTOs.DTO
 
         public string Url { get; set; }
 
+        public List<Certificaciones> Certificaciones { get;set; }
+
     }
 }

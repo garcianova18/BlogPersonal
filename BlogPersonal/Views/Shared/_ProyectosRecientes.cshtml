@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DTOs.DTO.Proyectos>
 
 <section id="Proyectos">
 
@@ -13,8 +13,9 @@
             {
                 <div class="col-12 col-md-4">
 
-                    <div class="card text-center shadow">
-                        <img src="~/Imagenes/proyectos/AgendaTelefonica.jpg" alt="..." height="200">
+                    <div class="card text-center shadow p-3">
+
+                        <img src="~/Imagenes/proyectos/AgendaTelefonica.jpg" alt="..." height="200" class="rounded-2 img-thumbnail">
                         <div class="card-body">
 
                             <h5 class="card-title text-dark">@item.Titulo</h5>

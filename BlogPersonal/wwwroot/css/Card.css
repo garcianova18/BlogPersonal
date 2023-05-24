@@ -4,13 +4,17 @@
 
     .card:hover {
         opacity: 0.8;
-        transform: translateY(-3%)
+        transform: translateY(-3%);
     }
 
+    .card .img-certificados {
+        transition: 0.3s ease-in;
+    }
+    .card .img-certificados:hover {
+            transform: scale(1.05)
+        }
 .seccion_Presentacion {
     background-image: linear-gradient(to top, #3573D8 0%, #1E2F99 80%);
-
-   
 }
 
  .seccion_Presentacion h5 {
@@ -27,10 +31,8 @@
     font-size: 0.8rem
 }
 
-.seccion_habilidades{
-
-    background-color: rgb(128, 128, 128, 0.1)
-
+.seccion_habilidades {
+    /*background-color: rgb(128, 128, 128, 0.1)*/
 }
 
 
@@ -70,4 +72,9 @@
     transform: scale(1.1);
 }
 
+.iconos_Habilidades{
+
+    font-size:40px;
+    padding: 20px 0 10px 0;
+}
 

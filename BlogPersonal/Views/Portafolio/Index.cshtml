@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DTOs.DTO.Proyectos>
+﻿@model DTOs.DTO.ProyectosCertificados;
 @{
 
     ViewData["Title"] = "Portafolio";
@@ -7,19 +7,22 @@
 @*  -------------Seccion de la Presentacion--------------*@
 
 
-@await Html.PartialAsync("Presentacion");
+@await Html.PartialAsync("Presentacion")
 
 
 @*  -------------Seccion de las habilidades Skill--------------*@
 
  
-@await Html.PartialAsync("_Habilidades");
+@await Html.PartialAsync("_Habilidades")
    
 
 
 
 @* ------------Seccion de Proyectos recientes-----------------*@
 
-@await Html.PartialAsync("_ProyectosRecientes", model:Model);
+@await Html.PartialAsync("_ProyectosRecientes", model:Model.Proyectos)
 
-                    0
+
+@* ------------Seccion de Proyectos recientes-----------------*@
+
+@await Html.PartialAsync("_Certificados", model:Model.Certificaciones)             

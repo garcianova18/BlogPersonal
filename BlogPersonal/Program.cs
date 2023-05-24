@@ -23,6 +23,8 @@ builder.Services.AddScoped<IRepositoryPost, RepositoryPost>();
 
 builder.Services.AddTransient<IServicioProyectos, ServicioProyectos>();
 
+builder.Services.AddTransient<IServicioCertificaciones, ServicioCeritificaciones>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
