@@ -4,11 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Editar</h1>
 
-<div class="row  justify-content-evenly">
 
-    <div class=" col-12 col-md-8 border border-secondary">
+<div class="row  justify-content-evenly bg-light rounded-3 p-5">
+
+    <div class=" col-12 col-md-8 ">
+
+        <h4 class="text-center">Editar Entrada</h4>
 
         <form asp-action="Edit" method="post" enctype="multipart/form-data" class="mt-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>

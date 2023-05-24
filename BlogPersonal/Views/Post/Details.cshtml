@@ -12,7 +12,7 @@
 
 
 
-    <div class="row justify-content-evenly  ">
+    <div class="row justify-content-evenly bg-light py-5 rounded-3 ">
 
         
        @* Seccion de detalles de los POST, Crear Comentarios y Mostrar Comentarios
@@ -139,7 +139,7 @@
      
         @* Seccion del listado de los articulos relacionados*@
 
-        @await Html.PartialAsync("_ArticulosRelacionados", model:Model.ListPostVMs);
+        @await Html.PartialAsync("_ArticulosRelacionados", model:Model.ListPostVMs)
 
 
 

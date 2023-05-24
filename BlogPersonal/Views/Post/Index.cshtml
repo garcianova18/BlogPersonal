@@ -5,17 +5,18 @@
  
     ViewData["Title"] = "Sitio del Ing. Wilson Garcia";
 }
+   
 
+    <div class="row mt-5 bg-light rounded-3 p-5">
 
-    <div class="row ">
-  
+    <h1 class="text-center py-5"> Bienvenidos al blog del Ing. Garcia Nova</h1>
 
         @if (Model.Count() > 0)
         {
     
             @foreach (var item in Model.OrderByDescending(f=> f.FechaPublicado))
             {
-               <div class="col-12 col-md-6 col-lg-4 mb-5">
+               <div class="col-12 col-md-6 col-lg-4 mb-3 ">
 
                     <div class="card shadow" >
 

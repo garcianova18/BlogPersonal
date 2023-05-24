@@ -21,10 +21,6 @@ builder.Services.AddScoped<IGuardarimagen, Guardarimagen>();
 
 builder.Services.AddScoped<IRepositoryPost, RepositoryPost>();
 
-builder.Services.AddTransient<IServicioProyectos, ServicioProyectos>();
-
-builder.Services.AddTransient<IServicioCertificaciones, ServicioCeritificaciones>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,6 +40,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Portafolio}/{action=Index}/{id?}");
+    pattern: "{controller=Post}/{action=Index}/{id?}");
 
 app.Run();

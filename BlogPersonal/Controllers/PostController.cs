@@ -17,15 +17,14 @@ namespace BlogPersonal.Controllers
         private readonly IMapper _mapper;
         private readonly IServicicesComboBox comboBox;
         private readonly IGuardarimagen guardarimagen;
-        private readonly IServicioProyectos proyectos;
+      
         private readonly IRepositoryPost _repository;
-        public PostController(IRepositoryPost repository,  IWebHostEnvironment environment, IMapper mapper, IServicicesComboBox comboBox, IGuardarimagen guardarimagen, IServicioProyectos proyectos)
+        public PostController(IRepositoryPost repository,  IWebHostEnvironment environment, IMapper mapper, IServicicesComboBox comboBox, IGuardarimagen guardarimagen)
         {
             this.environment = environment;
             _mapper = mapper;
             this.comboBox = comboBox;
             this.guardarimagen = guardarimagen;
-            this.proyectos = proyectos;
             _repository = repository;
         }
         public async Task<IActionResult> Index()
@@ -34,8 +33,6 @@ namespace BlogPersonal.Controllers
 
             var PostMapper = _mapper.Map<List<ListPostVM>>(post);
 
-            ViewBag.ListadoProyectos = Proyectos();
-            
             return View(PostMapper);
         }
 
@@ -299,11 +296,7 @@ namespace BlogPersonal.Controllers
         }
 
 
-        public IEnumerable<Proyectos> Proyectos()
-        {
-
-            return proyectos.Proyectos();
-        }
+     
 
 
     }
