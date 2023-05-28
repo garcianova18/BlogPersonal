@@ -93,25 +93,21 @@ namespace BlogPersonal.Controllers
             }
 
             
-
             var post = await _repository.GetPost(id);
   
             var PostMapper = _mapper.Map<DetailsPostVM>(post);
            
-        
-          
-
             if (post == null)
             {
                 return NotFound();
             }
 
             //obtenemos el listado de POSt para mostrarlo como articulos relacionados
-            var ListPost = await _repository.GetAll();
+            var ListPostRecientes = await _repository.GetAll();
 
-            var ListPostMapper = _mapper.Map<List<ListPostVM>>(ListPost);
+            var ListPostRecientesMapper = _mapper.Map<List<ListPostVM>>(ListPostRecientes);
            
-            PostMapper.ListPostVMs = ListPostMapper;
+            PostMapper.ListPostVMs = ListPostRecientesMapper.OrderByDescending(x=> x.FechaPublicado).Take(5).ToList();
 
             return View(PostMapper);
 
