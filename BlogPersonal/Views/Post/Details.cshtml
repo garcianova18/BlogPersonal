@@ -15,16 +15,16 @@
     <div class="row justify-content-evenly bg-light py-5 rounded-3 ">
 
         
-       @* Seccion de detalles de los POST, Crear Comentarios y Mostrar Comentarios
+         @* Seccion de detalles de los POST, Crear Comentarios y Mostrar Comentarios
         *@
-            <div class="col-12 col-md-8  mb-3 mb-md-0 ">
+            <div class="col-12 col-lg-8  mb-3 mb-md-0 ">
 
 
                 @* ----------Seccion de Detalles del articulos------*@
 
-                <div class="row g-0 ">
+               
 
-                    <div class="col-12 border boder-1 g-0 shadow mb-5">
+                    <div class=" border boder-1 g-0 shadow mb-5">
 
                         @if (Model.Imagen is not null)
                         {
@@ -78,68 +78,74 @@
 
                     </div>
 
-                </div>
 
-               
                 @* ----------Seccion de Comentarios del artuculo Crear y Mostrar------*@
 
-                <div class="row g-0">
-
-                    <div class="col-12 border boder-1 g-0 shadow  px-3">
+                     <div class="border boder-1 g-0 shadow  px-3">
 
 
-                        <p class="mt-3 ms-2"> @Model.ListComentarios.Count() Comentarios</p>
+                    <p class="mt-3 ms-2"> @Model.ListComentarios.Count() Comentarios</p>
 
 
-                        @* ---- Crear un nuevo Comentario ----------------*@
+                    @* ---- Crear un nuevo Comentario ----------------*@
 
-                        <form asp-controller="Post" asp-action="Details" method="post" class="mb-5 ">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <form asp-controller="Post" asp-action="Details" method="post" class="mb-5 ">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                            <input asp-for="Comentario.Descripcion" class="form-control py-3" placeholder="Agregar comentario" />
-                            <span asp-validation-for="Comentario.Descripcion" class="text-danger"></span>
+                        <input asp-for="Comentario.Descripcion" class="form-control py-3" placeholder="Agregar comentario" />
+                        <span asp-validation-for="Comentario.Descripcion" class="text-danger"></span>
 
-                            <input type="submit" class="btn btn-sm btn-success float-end  my-2" value="Enviar">
-
-
-                        </form>
+                        <input type="submit" class="btn btn-sm btn-success float-end  my-2" value="Enviar">
 
 
-                        @* -----Mostrar todos los Comentarios de un POST------------*@
+                    </form>
 
-                        @if (Model.ListComentarios is not null)
+
+                    @* -----Mostrar todos los Comentarios de un POST------------*@
+
+                    @if (Model.ListComentarios is not null)
+                    {
+                        @if (Model.ListComentarios.Count() > 0)
                         {
-                            @if (Model.ListComentarios.Count() > 0)
+                            @foreach (var item in Model.ListComentarios.OrderByDescending(f => f.FechaPublicado))
                             {
-                                @foreach (var item in Model.ListComentarios.OrderByDescending(f => f.FechaPublicado))
-                                {
-                                    <div class="border border-1 px-3 mb-3 rounded-2">
+                                <div class="border border-1 px-3 mb-3 rounded-2">
 
-                                        <h6 class="">Autor @item.IdUserNavigation.UserName</h6>
-                                        <p>@item.Descripcion</p>
-                                        <p class="text-muted">@item.FechaPublicado.ToString("d")</p>
-                                    </div>
-                                }
+                                    <h6 class="">Autor @item.IdUserNavigation.UserName</h6>
+                                    <p>@item.Descripcion</p>
+                                    <p class="text-muted">@item.FechaPublicado.ToString("d")</p>
+                                </div>
                             }
                         }
+                    }
 
 
 
 
-
-                    </div>
 
                 </div>
+
+
+              
+               
+               
+
+               
 
 
 
             </div>
 
-        
-     
-        @* Seccion del listado de los articulos relacionados*@
 
-        @await Html.PartialAsync("_ArticulosRelacionados", model:Model.ListPostVMs)
+            <div class="col-12 col-lg-4 col-xl-3 ">
+      
+                @* Seccion del listado de los articulos relacionados*@
+
+                 @await Html.PartialAsync("_ArticulosRelacionados", model:Model.ListPostVMs)
+
+            </div>
+     
+
 
 
 

@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark  bg-dark  box-shadow mb-3">
             <div class="container">
 
-                <a class="navbar-brand" asp-area="" asp-controller="Portafolio" asp-action="Index">
+                <a class="navbar-brand" asp-area="" asp-controller="Post" asp-action="Index">
 
                     <img src="~/Imagenes/ing_wilson.jpg" class="img-fluid rounded-circle" width="50" height="50"/>
 
@@ -47,21 +47,21 @@
                       
                         <li class="nav-item text-light">
 
-                            <a class="nav-link  " href="#Habilidades"> Habilidades</a>
+                            <a class="nav-link " asp-controller="Post" asp-action="Index"> Home</a>
                             
                         </li>
                         <li class="nav-item">
 
-                            <a class="nav-link " href="#Proyectos"> Proyectos</a>
+                            <a class="nav-link " href="#"> Contacto</a>
                         </li>
                         <li class="nav-item">
 
-                        <a class="nav-link " href="#Certificados"> Certificados</a>
+                        <a class="nav-link " href="#"> Quienes Soy</a>
                         </li>
 
                         <li class="nav-item">
 
-                            <a class="nav-link " asp-controller="Post" asp-action="Index"> Visitar Blog</a>
+                            <a class="nav-link " asp-controller="Post" asp-action="Index">Ir a Portafolio</a>
                             
                         </li>
                     </ul>
@@ -106,22 +106,29 @@
 
                             <ul class="list-unstyled h-75 d-flex flex-column justify-content-center ">
 
-                                <li class="nav-item ">
+                        <li class="nav-item">
 
-                                    <a class="nav-link " href="#Habilidades"> Habilidades</a>
+                            <a class="nav-link " asp-controller="Post" asp-action="Index"> Home</a>
 
-                                </li>
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link " href="#"> Contacto</a>
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link " href="#"> Quienes Soy</a>
+                        </li>
+
+                        <li class="nav-item">
                                 <li class="nav-item">
 
-                                    <a class="nav-link " href="#Proyectos"> Proyectos</a>
+                                    <a class="nav-link " href="#Proyectos"> Ir a Portafolio</a>
                                 </li>
 
 
-                                <li class="nav-item">
-
-                                    <a class="nav-link " asp-controller="Post" asp-action="Index"> Visitar Blog</a>
-
-                                </li>
+                               
                             </ul>
 
                         </div>
@@ -131,7 +138,7 @@
                             <h5 class="mt-5">Contacto</h5>
 
                             <div class=" h-75 d-flex justify-content-center align-items-center">
-                        <a class="btn btn-lg btn-outline-warning text-light" href="mailto:Wilsongarcianova18@gmail.com">Contactame</a>
+                        <a class="btn btn-lg btn-primary text-light" href="mailto:Wilsongarcianova18@gmail.com">Contactame</a>
 
                             </div>
 
@@ -143,7 +150,8 @@
 
                     <div class="col-12 my-5 text-center text-white  ">
 
-                    <p> Design by Wilson Garcia Nova  &copy; @{
+                    <p>
+                        Design by <span class="text-primary ">Wilson Garcia Nova</span>  &copy; @{
                             var anio = DateTime.Now;
                         } @anio.Year</p>
 

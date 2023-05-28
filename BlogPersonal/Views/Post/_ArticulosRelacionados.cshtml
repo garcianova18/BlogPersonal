@@ -3,21 +3,21 @@
 
 
 
-<div class="col-12 col-md-4 col-xl-3 border border-2 py-3 px-2 bg-light shadow ">
 
-   
+    <div class="border border-2 py-3 px-2 bg-light shadow rounded-2">
 
-         <h6 class="text-center">Articulos Recientes</h6>
+        <h6 class="text-center">Articulos Recientes</h6>
 
-        @foreach(var items in Model.Take(10)){
+        @foreach (var items in Model.Take(10))
+        {
 
 
 
-        <a class="text-decoration-none" asp-action="Details" asp-controller="Post" asp-route-id="@items.Id">
+            <a class="text-decoration-none" asp-action="Details" asp-controller="Post" asp-route-id="@items.Id">
 
                 @if (items.Imagen is not null)
                 {
-                    <img src="/Imagenes/@items.Imagen" class="img-fluid img-thumbnail" >
+                    <img src="/Imagenes/@items.Imagen" class="img-fluid img-thumbnail">
 
                 }
                 else
@@ -31,7 +31,7 @@
 
 
                 }
-                
+
 
                 <p class="text-dark ">@items.Titulo</p>
 
@@ -39,8 +39,7 @@
 
 
         }
+       </div>
 
 
     
-
- </div>

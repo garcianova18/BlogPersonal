@@ -155,7 +155,7 @@ namespace BlogPersonal.Controllers
 
                 var buscarImagen = await _repository.GetById(postVM.Id);
 
-                Post postMapper;
+                 var postMapper = _mapper.Map<Post>(postVM);
 
                 if (postVM.ImagenFile is not null)
                 {
@@ -169,13 +169,7 @@ namespace BlogPersonal.Controllers
                         System.IO.File.Delete(buscarRutaImg);
 
                     }
-
-
-                    postMapper = _mapper.Map<Post>(postVM);
-
-                    postMapper.Status = 1;
-                    postMapper.IdUser = _repository.GetUsuario();
-                    postMapper.FechaPublicado = DateTime.Now;
+                    //guardamos la nueva imagen en el directorio y obtenemos la ruta para guaradar en db
                     postMapper.Imagen = await guardarimagen.GuardarImagenes(postVM.ImagenFile);
 
                 }
@@ -183,15 +177,18 @@ namespace BlogPersonal.Controllers
                 {
 
 
-                    postMapper = _mapper.Map<Post>(postVM);
-
-                    postMapper.Status = 1;
-                    postMapper.IdUser = 1;
-                    postMapper.FechaPublicado = DateTime.Now;
+                    //si entra aqui fue que no se seleccionno una nueva imagen y le dejamos la que tenia
+                    //ojo detener si no tenia pues se guarda como esta sin imagen
+                   
                     postMapper.Imagen = buscarImagen.Imagen;
 
 
                 }
+
+               //le pasamos la fecha de cuando se creo ya que esta no sera modificada
+                postMapper.FechaPublicado = buscarImagen.FechaPublicado;
+                postMapper.Status = 1;
+                postMapper.IdUser = _repository.GetUsuario();
                 await _repository.Update(postMapper);
 
                 return RedirectToAction("Index");
