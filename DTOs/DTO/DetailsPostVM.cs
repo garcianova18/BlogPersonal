@@ -16,7 +16,10 @@ namespace DTOs.DTO
         //Propiedad para crear un comentario
         public CrearComentarioVM Comentario { get; set; }
 
+        public int Antetior { get; set; }
+        public int Siguiente { get; set; }
 
-        
+
+
     }
 }
