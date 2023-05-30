@@ -21,6 +21,8 @@ builder.Services.AddScoped<IGuardarimagen, Guardarimagen>();
 
 builder.Services.AddScoped<IRepositoryPost, RepositoryPost>();
 
+builder.Services.AddScoped<IServicioPaginacionDetails, ServicioPaginacionDetails>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
