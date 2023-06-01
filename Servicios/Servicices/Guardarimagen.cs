@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DTOs.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Servicios.Servicices
 {
@@ -17,12 +18,6 @@ namespace Servicios.Servicices
     }
     public class Guardarimagen:IGuardarimagen
     {
-
-
-        public Guardarimagen()
-        {
-         
-        }
 
         public async Task< string >GuardarImagenes(IFormFile img )
         {

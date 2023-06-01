@@ -10,12 +10,12 @@ namespace Servicios.Servicices
 
     public interface IServicioPaginacionDetails
     {
-        DetailsPostVM PaginacionDetails(List<ListPostVM> ListPost, int id);
+        DetailsPostVM PaginacionDetails(List<PostVM> ListPost, int id);
     }
     public class ServicioPaginacionDetails:IServicioPaginacionDetails
     {
 
-        public  DetailsPostVM PaginacionDetails(List<ListPostVM> ListPost, int id)
+        public  DetailsPostVM PaginacionDetails(List<PostVM> ListPost, int id)
         {
 
             int indexPaginaAnterior, indexPaginaSiguiente, indexPaginaActual = ListPost.FindIndex(x => x.Id == id);
@@ -32,6 +32,7 @@ namespace Servicios.Servicices
 
             var detailPost = new DetailsPostVM();
 
+            detailPost.PaginaActual = id;
             detailPost.PaginaAntetior = ListPost[indexPaginaAnterior].Id;
             detailPost.PaginaSiguiente = ListPost[indexPaginaSiguiente].Id;
 

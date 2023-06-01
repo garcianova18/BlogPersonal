@@ -8,23 +8,28 @@ using System.Threading.Tasks;
 
 namespace DTOs.DTO
 {
-    public class DetailsPostVM:ListPostVM
+    public class DetailsPostVM:PostVM
     {
-        public List<ListPostVM> ListPostVMs { get; set;}
+
+        //propiedad para mostrar el listado de articulos relacionados
+        public List<PostVM> ListPostVMs { get; set;}
 
 
         //Propiedad para crear un comentario
         public CrearComentarioVM Comentario { get; set; }
 
 
-        //Propiedad para la apginacion Pagina Antetior
+        //Propiedad para la paginacion Pagina Antetior
         public int PaginaAntetior { get; set; }
 
 
-        //Propiedad para la apginacion Pagina Siguiente
+        //Propiedad para la paginacion Pagina Siguiente
         public int PaginaSiguiente { get; set; }
 
+        //Propiedad para la paginacion Pagina Actual
+        public int PaginaActual { get; set; }
 
-
+        //Porpiedad para mostrar el listado de Comentarios que pertenecen a un Post en la vista Detalils
+        public List<Comentario> ListComentarios { get; set; }
     }
 }

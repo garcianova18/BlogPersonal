@@ -1,9 +1,10 @@
 ﻿using Dominio.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Persistencia.Context;
-
-
+using System.Security.Claims;
+using System.Timers;
 
 namespace Servicios.Repository
 {
@@ -23,9 +24,12 @@ namespace Servicios.Repository
     public class RepositoryPost:IRepositoryPost
     {
         private readonly BlogPersonalContext _context;
-        public RepositoryPost(BlogPersonalContext context)
+        private readonly IHttpContextAccessor httpContext;
+
+        public RepositoryPost(BlogPersonalContext context, IHttpContextAccessor httpContext)
         {
             _context = context;
+            this.httpContext = httpContext;
         }
 
         public async Task<Post> GetPost(int? id)
@@ -85,9 +89,17 @@ namespace Servicios.Repository
         public int GetUsuario()
         {
 
+            //validamos que exista un usario autenticado para cuando se valla a crear un comentario y no sea de un usuario autenticado
+            //el usuario sea de id 0;
 
+            if (httpContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                var usuarioId = httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return 1;
+                return Int32.Parse(usuarioId);
+            }
+
+            return 0;
         }
 
         public async Task addComent(Comentario comentario)

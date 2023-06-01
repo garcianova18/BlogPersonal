@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTOs.DTO
 {
-    public class ListPostVM
+    public class PostVM
     {
 
         public int Id { get; set; }
@@ -26,17 +26,6 @@ namespace DTOs.DTO
         public int IdCategoria { get; set; }
 
         public int IdUser { get; set; }
-
-        //Porpiedad para mostrar el listado de Comentarios que pertenecen a un Post en la vista Detalils
-        public List<Comentario> ListComentarios { get; set; }
-
-
-        //propiedad para mostrar el listado de Proyectos
-
-        public List<Proyectos> ListProyectos { get;set; }
-
-
-
 
     }
 }

@@ -2,6 +2,7 @@
 using AutoMapper;
 using Dominio.Models;
 using DTOs.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Servicios.Repository;
 using Servicios.Servicices;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace BlogPersonal.Controllers
 {
+   
     public class PostController : Controller
     {
         private readonly IWebHostEnvironment environment;
@@ -26,19 +28,20 @@ namespace BlogPersonal.Controllers
             this.paginacionDetails = paginacionDetails;
             _repository = repository;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var post = await _repository.GetAll();
 
-            var PostMapper = _mapper.Map<List<ListPostVM>>(post);
+            var PostMapper = _mapper.Map<List<PostVM>>(post);
 
             return View(PostMapper);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewBag.IdCategoria = comboBox.ComboCategoria();
-
 
             return View();
         }
@@ -59,7 +62,7 @@ namespace BlogPersonal.Controllers
                 postMapper.IdUser = _repository.GetUsuario();
 
 
-                if (post.ImagenFile != null)
+                if (post.ImagenFile is not null)
                 {
 
 
@@ -106,7 +109,7 @@ namespace BlogPersonal.Controllers
             List<Post> ListPost = (List<Post>)await _repository.GetAll();
 
            // articulos relacionados
-            var ListPostRecientesMapper = _mapper.Map<List<ListPostVM>>(ListPost);
+            var ListPostRecientesMapper = _mapper.Map<List<PostVM>>(ListPost);
 
             PostMapper.ListPostVMs = ListPostRecientesMapper.OrderByDescending(x => x.FechaPublicado).Take(5).ToList();
 
@@ -118,12 +121,13 @@ namespace BlogPersonal.Controllers
 
             PostMapper.PaginaAntetior = paginacion.PaginaAntetior;
             PostMapper.PaginaSiguiente = paginacion.PaginaSiguiente;
-
+            PostMapper.PaginaActual = paginacion.PaginaActual;
             return View(PostMapper);
 
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.IdCategoria = comboBox.ComboCategoria();
@@ -147,6 +151,7 @@ namespace BlogPersonal.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit(EditPostVM postVM)
         {
             if (ModelState.IsValid)
@@ -205,7 +210,7 @@ namespace BlogPersonal.Controllers
         }
 
 
-
+        [Authorize (Roles ="Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null || id == 0)
@@ -264,7 +269,9 @@ namespace BlogPersonal.Controllers
 
                 coment.Descripcion = comentatio.Comentario.Descripcion;
                 coment.IdPost = id.GetValueOrDefault();
-                coment.IdUser = _repository.GetUsuario();
+
+                //si el usuario es registrado enviamos su id si no enviamos null
+                coment.IdUser = _repository.GetUsuario() == 0 ? null : _repository.GetUsuario();
                 coment.FechaPublicado = DateTime.Now;
                 coment.Status = 1;
 
@@ -285,10 +292,10 @@ namespace BlogPersonal.Controllers
                 return NotFound();
             }
 
-            //obtenemos el listado de POSt para mostrarlo como articulos relacionados
+            //obtenemos el listado de Post para mostrarlo como articulos relacionados
             var ListPost = await _repository.GetAll();
 
-            var ListPostMapper = _mapper.Map<List<ListPostVM>>(ListPost);
+            var ListPostMapper = _mapper.Map<List<PostVM>>(ListPost);
 
             PostMapper.ListPostVMs = ListPostMapper;
 

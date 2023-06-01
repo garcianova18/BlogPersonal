@@ -1,5 +1,6 @@
 using BlogPersonal.Models;
 using DTOs.DTO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Persistencia.Context;
@@ -23,6 +24,17 @@ builder.Services.AddScoped<IRepositoryPost, RepositoryPost>();
 
 builder.Services.AddScoped<IServicioPaginacionDetails, ServicioPaginacionDetails>();
 
+builder.Services.AddScoped<IServicioUsuario, ServicioUsuario>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(op =>
+{
+
+    op.LoginPath = "/Acceso/Login";
+    op.AccessDeniedPath = "/Acceso/Restringido";
+});
+
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +50,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

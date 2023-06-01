@@ -23,7 +23,7 @@ public partial class Post
 
     public virtual ICollection<Comentario> Comentarios { get; set; } = new List<Comentario>();
 
-    public virtual Categoria IdCategoriaNavigation { get; set; } = null!;
+    public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
 
     public virtual User IdUserNavigation { get; set; } = null!;
 }

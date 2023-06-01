@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+     <link  rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <title>Restringido</title>
+</head>
+<body>
+   <div class="container">
+
+        <div class="row min-vh-100 d-flex align-items-center">
+
+            <div class="co-12">
+
+                <div class="alert alert-danger" role="alert">
+
+                    <p class="fs-5">No esta autorizado para realizar esto, debes de ser usuario administrador</p>
+                    <a class="btn btn-primary" asp-action="Index" asp-controller="Post">Regresar al Home</a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+   </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 ﻿@using System.Text.RegularExpressions;
 @using DTOs.DTO;
-@model IEnumerable<DTOs.DTO.ListPostVM>
+@model IEnumerable<DTOs.DTO.PostVM>
 @{
  
     ViewData["Title"] = "Sitio del Ing. Wilson Garcia";
@@ -58,8 +58,8 @@
                                    @text...                           
                             </div>
                             <a asp-action="Details" asp-controller="Post" asp-route-id="@item.Id" class="btn btn-sm btn-primary mt-3">Leer Mas...</a>
-                            <p class="text-muted text-start  m-0">Autor <span class="text-primary">@item.IdUserNavigationUserName</span></p>
-                            <p class="text-muted text-start  m-0">Creado @item.FechaPublicado.ToString("dd 'de' MMMM yyyy")</p>
+                        <small class="text-muted text-start d-block  m-0">Autor <span class="text-primary">@item.IdUserNavigationUserName</span></small>
+                            <small class="text-muted text-start d-block m-0">Creado @item.FechaPublicado.ToString("dd 'de' MMMM yyyy")</small>
                         </div>
 
                     </div>
