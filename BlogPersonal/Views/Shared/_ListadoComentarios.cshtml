@@ -1,0 +1,67 @@
+﻿@model DTOs.DTO.DetailsPostVM
+
+
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <span class="text-primary">Mostrar Comentarios</span>
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+
+                <div class=" g-0 shadow px-3 ">
+
+
+                    @if (Model.ListComentarios is not null)
+                    {
+                        @if (Model.ListComentarios.Count() > 0)
+                        {
+                            @foreach (var item in Model.ListComentarios.OrderByDescending(f => f.FechaPublicado))
+                            {
+                                <div class="border border-1 p-4 mb-3 rounded-2 d-flex flex-column ">
+
+                                    <div class="  d-flex align-items-center ">
+
+                                        @* si el id del usuario es null significa que este comentario fue creado
+                            por un usuario que no esta registrado, entonces mostramo en el logo la primera letra del nombre que este ingreso*@
+                                        @if (item.IdUser is null)
+                                        {
+                                            <p class="comentarios_autor"> @item.Nombre.Substring(0,1)</p>
+                                        }
+                                        else
+                                        {
+                                            @* si fue creado por un usuario registrado en el logo
+                            mostramos la primera letra de su usuario*@
+                                            <p class="comentarios_autor"> @item.IdUserNavigation.UserName.Substring(0,1)</p>
+
+                                        }
+
+                                        <p class="">@item.Descripcion</p>
+
+                                    </div>
+
+
+                                    <div class="">
+
+                                        <small class="text-muted">@item.FechaPublicado.ToString("d")</small>
+
+                                    </div>
+
+
+
+                                </div>
+                            }
+                        }
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

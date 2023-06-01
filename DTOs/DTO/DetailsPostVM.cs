@@ -30,6 +30,6 @@ namespace DTOs.DTO
         public int PaginaActual { get; set; }
 
         //Porpiedad para mostrar el listado de Comentarios que pertenecen a un Post en la vista Detalils
-        public List<Comentario> ListComentarios { get; set; }
+        public ICollection<Comentario> ListComentarios { get; set; }
     }
 }

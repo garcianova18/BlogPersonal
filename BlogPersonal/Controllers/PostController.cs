@@ -97,8 +97,18 @@ namespace BlogPersonal.Controllers
 
             var post = await _repository.GetPost(id);
 
-            var PostMapper = _mapper.Map<DetailsPostVM>(post);
+            var PostMapper = new DetailsPostVM();
 
+            try
+            {
+                 PostMapper = _mapper.Map<DetailsPostVM>(post);
+            }
+            catch (Exception )
+            {
+
+                throw;
+            }
+           ;
             if (post == null)
             {
                 return NotFound();
@@ -272,6 +282,7 @@ namespace BlogPersonal.Controllers
 
                 //si el usuario es registrado enviamos su id si no enviamos null
                 coment.IdUser = _repository.GetUsuario() == 0 ? null : _repository.GetUsuario();
+                coment.Nombre = comentatio.Comentario.Nombre;
                 coment.FechaPublicado = DateTime.Now;
                 coment.Status = 1;
 

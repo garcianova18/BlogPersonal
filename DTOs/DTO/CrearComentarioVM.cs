@@ -19,10 +19,15 @@ namespace DTOs.DTO
 
         public int IdPost { get; set; }
 
-        public int IdUser { get; set; }
+        public int? IdUser { get; set; }
 
         public int Status { get; set; }
 
-      
+        [Required(ErrorMessage = "debes de ingresar un nombre")]
+        [StringLength(maximumLength:100, MinimumLength =3, ErrorMessage ="El Nombre debe de contener minimo 3 caracteres")]
+        public string? Nombre { get; set; }
+
+
+        public User? IdUserNavigation { get; set; }
     }
 }
