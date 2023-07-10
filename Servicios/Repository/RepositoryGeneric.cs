@@ -10,17 +10,17 @@ namespace Servicios.Repository
     public class RepositoryGeneric<T> : IRepositoryGeneric<T> where T : class
     {
         private readonly BlogPersonalContext _Context;
-        DbSet<T> Entity;
+        private DbSet<T> entities;
         public RepositoryGeneric(BlogPersonalContext context)
         {
             _Context = context;
-            Entity = _Context.Set<T>();
+            entities = _Context.Set<T>();
         }
         public async Task Create(T entity)
         {
             try
             {
-                _Context.Add(entity);
+               await _Context.AddAsync(entity);
                 await _Context.SaveChangesAsync();
             }
             catch (Exception)
@@ -31,27 +31,37 @@ namespace Servicios.Repository
            
         }
 
-        public async Task Delete(int? id)
+        public async Task Delete(T entity)
         {
-            _Context.Remove(id);
-            await _Context.SaveChangesAsync();
+            try
+            {
+                entities.Remove(entity);
+                await _Context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
-         return await Entity.ToListAsync();
+           
+                return await entities.ToListAsync();
+           
         }
 
         public async Task<T> GetById(int? id)
         {
-            return await Entity.FindAsync(id);    
+            return await entities.FindAsync(id);    
         }
 
         public async Task Update(T entity)
         {
             try
             {
-                _Context.Update(entity);
+                entities.Update(entity);
                 await _Context.SaveChangesAsync();
             }
             catch (Exception)

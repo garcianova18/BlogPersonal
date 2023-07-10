@@ -13,13 +13,9 @@ public partial class Comentario
 
     public int IdPost { get; set; }
 
-    public int? IdUser { get; set; }
-
     public int Status { get; set; }
 
-    public string? Nombre { get; set; }
+    public string Nombre { get; set; } = null!;
 
     public virtual Post IdPostNavigation { get; set; } = null!;
-
-    public virtual User? IdUserNavigation { get; set; }
 }

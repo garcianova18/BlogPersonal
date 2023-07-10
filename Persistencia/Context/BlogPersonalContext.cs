@@ -17,7 +17,7 @@ public partial class BlogPersonalContext : DbContext
     {
     }
 
-    public virtual DbSet<Categorium> Categoria { get; set; }
+    public virtual DbSet<Categoria> Categoria { get; set; }
 
     public virtual DbSet<Comentario> Comentarios { get; set; }
 
@@ -27,13 +27,10 @@ public partial class BlogPersonalContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server= MCFLOW-PC\\SQLEXPRESS; Initial catalog =blogPersonal ; Trusted_Connection = true; TrustServerCertificate= true;");
-
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Categorium>(entity =>
+        modelBuilder.Entity<Categoria>(entity =>
         {
             entity.Property(e => e.Nombre)
                 .HasMaxLength(100)
@@ -44,18 +41,19 @@ public partial class BlogPersonalContext : DbContext
         {
             entity.ToTable("Comentario");
 
-            entity.Property(e => e.Descripcion).IsUnicode(false);
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(200)
+                .IsUnicode(false);
             entity.Property(e => e.FechaPublicado).HasColumnType("datetime");
             entity.Property(e => e.IdPost).HasColumnName("idPost");
-            entity.Property(e => e.Nombre).HasMaxLength(100);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdPostNavigation).WithMany(p => p.Comentarios)
                 .HasForeignKey(d => d.IdPost)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Comentario_Post");
-
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Comentarios)
-                .HasForeignKey(d => d.IdUser)
-                .HasConstraintName("FK_Comentario_User");
         });
 
         modelBuilder.Entity<Post>(entity =>
@@ -82,8 +80,6 @@ public partial class BlogPersonalContext : DbContext
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK_Id");
-
             entity.ToTable("Rol");
 
             entity.Property(e => e.Nombre)
@@ -97,12 +93,14 @@ public partial class BlogPersonalContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Apellido)
-                .HasMaxLength(100)
+                .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Nombre)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Password).IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.UserName)
                 .HasMaxLength(50)
                 .IsUnicode(false);

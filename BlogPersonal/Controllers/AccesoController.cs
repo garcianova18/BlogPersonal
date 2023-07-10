@@ -29,7 +29,7 @@ namespace BlogPersonal.Controllers
         public async Task<IActionResult>Login(UserLoginVM userLogin)
         {
 
-            var usuarioMapper = mapper.Map<Dominio.Models.User>(userLogin);
+            var usuarioMapper = mapper.Map<User>(userLogin);
 
             var usuario = await servicioUsuario.GetUser(usuarioMapper);
 
@@ -40,7 +40,8 @@ namespace BlogPersonal.Controllers
                     new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
                     new Claim(ClaimTypes.Name, usuario.UserName),
                     new Claim(ClaimTypes.Role, usuario.IdRolNavigation.Nombre),
-                    new Claim("nombreUsuario", usuario.Nombre),
+                    new Claim(ClaimTypes.GivenName, usuario.Nombre),
+                    new Claim(ClaimTypes.Surname, usuario.Apellido),
                  };
 
 

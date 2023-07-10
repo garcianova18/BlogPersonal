@@ -25,19 +25,11 @@
 
                                     <div class="  d-flex align-items-center ">
 
-                                        @* si el id del usuario es null significa que este comentario fue creado
-                            por un usuario que no esta registrado, entonces mostramo en el logo la primera letra del nombre que este ingreso*@
-                                        @if (item.IdUser is null)
-                                        {
-                                            <p class="comentarios_autor"> @item.Nombre.Substring(0,1)</p>
-                                        }
-                                        else
-                                        {
-                                            @* si fue creado por un usuario registrado en el logo
-                            mostramos la primera letra de su usuario*@
-                                            <p class="comentarios_autor"> @item.IdUserNavigation.UserName.Substring(0,1)</p>
 
-                                        }
+                                        @*Escojemo la primera letra del nombre para mostrarlo como logo*@
+                                        <p class="comentarios_autor"> @item.Nombre.Substring(0,1)</p>
+
+                                        
 
                                         <p class="">@item.Descripcion</p>
 
@@ -55,6 +47,10 @@
                                 </div>
                             }
                         }
+                    }
+                    else
+                    {
+                        <p>Sé el primero en comentar</p>                    
                     }
 
                 </div>

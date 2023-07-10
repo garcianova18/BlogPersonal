@@ -15,7 +15,7 @@
     <div class="row justify-content-evenly bg-light py-5 rounded-3 ">
 
 
-       
+
         <div class="col-12 col-lg-8  mb-3 mb-md-0 ">
 
 
@@ -86,32 +86,34 @@
 
             @* ---- Crear un nuevo Comentario ----------------*@
 
-            <form asp-controller="Post" asp-action="Details" method="post" class="mt-5 mb-3">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* ---- Los usuarios Autenticados no pueden comentar----------------*@
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <form asp-controller="Post" asp-action="Details" method="post" class="mt-5 mb-3">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <p class=" ms-2"> @Model.ListComentarios.Count() Comentarios</p>
+                    <p class=" ms-2"> @Model.ListComentarios.Count() Comentarios</p>
 
-                <div class="mb-3">
-                    @if (!User.Identity.IsAuthenticated)
-                    {
+                    <div class="mb-3">
+
                         <input asp-for="Comentario.Nombre" class="form-control" placeholder="Nombre" />
                         <span asp-validation-for="Comentario.Nombre" class="text-danger"></span>
-                    }
-                </div>
 
-                <div class="mb-3">
+                    </div>
 
-                    <textarea asp-for="Comentario.Descripcion" class="form-control py-3" placeholder="Agregar comentario"></textarea>
-                    <span asp-validation-for="Comentario.Descripcion" class="text-danger"></span>
-                </div>
+                    <div class="mb-3">
 
-                <div class="mb-3 text-end">
-                    <input type="submit" class="btn btn-sm btn-success" value="Enviar">
-                </div>
+                        <textarea asp-for="Comentario.Descripcion" class="form-control py-3" placeholder="Agregar comentario"></textarea>
+                        <span asp-validation-for="Comentario.Descripcion" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 text-end">
+                        <input type="submit" class="btn btn-sm btn-success" value="Enviar">
+                    </div>
 
 
-            </form>
-
+                </form>
+            }
 
             @* -----Mostrar todos los Comentarios de un POST------------*@
 

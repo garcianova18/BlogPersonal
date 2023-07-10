@@ -26,6 +26,8 @@ builder.Services.AddScoped<IServicioPaginacionDetails, ServicioPaginacionDetails
 
 builder.Services.AddScoped<IServicioUsuario, ServicioUsuario>();
 
+builder.Services.AddScoped<IServicesComment, ServicesComment>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(op =>
 {
 

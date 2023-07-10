@@ -1,5 +1,5 @@
 ﻿
-@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
 <!DOCTYPE html>
 
 <html lang="en">
@@ -42,7 +42,7 @@
 
                                 <a class="nav-link " asp-controller="Post" asp-action="Index">
 
-                                    <small class="online"></small> @User.Identity.Name
+                                    <small class="online"></small> @User.FindFirstValue(ClaimTypes.GivenName)
                                 </a>
 
                             </li>
@@ -60,7 +60,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li> <a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="Create">Create New</a></li>
+                                    <li> <a class="dropdown-item" asp-area="" asp-controller="Post" asp-action="Create">Create Nueva Entrada</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
