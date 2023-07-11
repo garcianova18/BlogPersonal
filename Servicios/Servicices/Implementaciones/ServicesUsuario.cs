@@ -6,19 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Context;
 using Microsoft.EntityFrameworkCore;
+using Servicios.Servicices.Interfaces;
 
-namespace Servicios.Servicices
+namespace Servicios.Servicices.Implementaciones
 {
 
-    public interface IServicioUsuario
-    {
-        Task<User> GetUser(User user);
-    }
-    public class ServicioUsuario: IServicioUsuario
+   
+    public class ServicesUsuario : IServicesUsuario
     {
         private readonly BlogPersonalContext context;
 
-        public ServicioUsuario(BlogPersonalContext context)
+        public ServicesUsuario(BlogPersonalContext context)
         {
             this.context = context;
         }
@@ -27,7 +25,7 @@ namespace Servicios.Servicices
 
         public async Task<User> GetUser(User user)
         {
-            var usuario = await context.Users.Include(rol=> rol.IdRolNavigation) .FirstOrDefaultAsync(u=>u.UserName == user.UserName && u.Password == user.Password);
+            var usuario = await context.Users.Include(rol => rol.IdRolNavigation).FirstOrDefaultAsync(u => u.UserName == user.UserName && u.Password == user.Password);
 
             return usuario;
 

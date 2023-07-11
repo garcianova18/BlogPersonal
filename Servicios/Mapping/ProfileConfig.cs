@@ -3,7 +3,7 @@ using Dominio.Models;
 using DTOs.DTO;
     
 
-namespace BlogPersonal
+namespace Servicios.Mapping
 {
     public class ProfileConfig: Profile
     {

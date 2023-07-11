@@ -8,22 +8,20 @@ using DTOs.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
+using Servicios.Servicices.Interfaces;
 
-namespace Servicios.Servicices
+namespace Servicios.Servicices.Implementaciones
 {
 
-    public interface IGuardarimagen
-    {
-        Task<string> GuardarImagenes(IFormFile im);
-    }
-    public class Guardarimagen:IGuardarimagen
+
+    public class Guardarimagen : IGuardarimagen
     {
 
-        public async Task< string >GuardarImagenes(IFormFile img )
+        public async Task<string> GuardarImagenes(IFormFile img)
         {
 
             //obtener nombre y extension del File para gardar como string en Db
-            
+
             string FileName = Path.GetFileNameWithoutExtension(img.FileName);
             string Extension = Path.GetExtension(img.FileName);
             string ImagenName = FileName + "_" + Guid.NewGuid() + Extension;

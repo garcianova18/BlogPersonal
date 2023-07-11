@@ -1,11 +1,10 @@
-using BlogPersonal.Models;
-using DTOs.DTO;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Persistencia.Context;
 using Servicios.Repository;
-using Servicios.Servicices;
+using Servicios.Servicices.Interfaces;
+using Servicios.Servicices.Implementaciones;
+using Servicios.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,16 +14,17 @@ builder.Services.AddDbContext<BlogPersonalContext>(op=>op.UseSqlServer(builder.C
 builder.Services.AddScoped(typeof(IRepositoryGeneric<>), typeof(RepositoryGeneric<>));
 
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(ProfileConfig));
 
 builder.Services.AddScoped<IServicicesComboBox, ServicicesComboBox>();
+
 builder.Services.AddScoped<IGuardarimagen, Guardarimagen>();
 
-builder.Services.AddScoped<IRepositoryPost, RepositoryPost>();
+builder.Services.AddScoped<IServicesPost, ServicesPost>();
 
-builder.Services.AddScoped<IServicioPaginacionDetails, ServicioPaginacionDetails>();
+builder.Services.AddScoped<IServicesPaginacionDetails, ServicesPaginacionDetails>();
 
-builder.Services.AddScoped<IServicioUsuario, ServicioUsuario>();
+builder.Services.AddScoped<IServicesUsuario, ServicesUsuario>();
 
 builder.Services.AddScoped<IServicesComment, ServicesComment>();
 

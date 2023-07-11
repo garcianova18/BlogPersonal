@@ -4,18 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs.DTO;
+using Servicios.Servicices.Interfaces;
 
-namespace Servicios.Servicices
+namespace Servicios.Servicices.Implementaciones
 {
 
-    public interface IServicioPaginacionDetails
-    {
-        DetailsPostVM PaginacionDetails(List<PostVM> ListPost, int id);
-    }
-    public class ServicioPaginacionDetails:IServicioPaginacionDetails
+       public class ServicesPaginacionDetails : IServicesPaginacionDetails
     {
 
-        public  DetailsPostVM PaginacionDetails(List<PostVM> ListPost, int id)
+        public DetailsPostVM PaginacionDetails(List<PostVM> ListPost, int id)
         {
 
             int indexPaginaAnterior, indexPaginaSiguiente, indexPaginaActual = ListPost.FindIndex(x => x.Id == id);

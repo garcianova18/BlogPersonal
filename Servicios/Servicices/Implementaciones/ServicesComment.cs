@@ -6,18 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Persistencia.Context;
+using Servicios.Servicices.Interfaces;
 
-namespace Servicios.Servicices
+namespace Servicios.Servicices.Implementaciones
 {
-    public interface IServicesComment:IRepositoryGeneric<Comentario>
-    {
-
-    }
-    public class ServicesComment:RepositoryGeneric<Comentario>, IServicesComment
+   
+    public class ServicesComment : RepositoryGeneric<Comentario>, IServicesComment
     {
         private readonly BlogPersonalContext _context;
 
-        public ServicesComment(BlogPersonalContext context): base(context) 
+        public ServicesComment(BlogPersonalContext context) : base(context)
         {
             _context = context;
         }

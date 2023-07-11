@@ -4,7 +4,8 @@ using DTOs.DTO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Servicios.Servicices;
+using Servicios.Servicices.Implementaciones;
+using Servicios.Servicices.Interfaces;
 using System.Security.Claims;
 
 namespace BlogPersonal.Controllers
@@ -12,10 +13,10 @@ namespace BlogPersonal.Controllers
     public class AccesoController : Controller
     {
         private readonly IHttpContextAccessor httpContext;
-        private readonly IServicioUsuario servicioUsuario;
+        private readonly IServicesUsuario servicioUsuario;
         private readonly IMapper mapper;
 
-        public AccesoController(IHttpContextAccessor httpContext, IServicioUsuario servicioUsuario, IMapper mapper)
+        public AccesoController(IHttpContextAccessor httpContext, IServicesUsuario servicioUsuario, IMapper mapper)
         {
             this.httpContext = httpContext;
             this.servicioUsuario = servicioUsuario;

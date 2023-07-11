@@ -4,8 +4,8 @@ using Dominio.Models;
 using DTOs.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Servicios.Repository;
-using Servicios.Servicices;
+using Servicios.Servicices.Implementaciones;
+using Servicios.Servicices.Interfaces;
 using System.Linq;
 using System.Security.Claims;
 
@@ -18,11 +18,11 @@ namespace BlogPersonal.Controllers
         private readonly IMapper _mapper;
         private readonly IServicicesComboBox comboBox;
         private readonly IGuardarimagen guardarimagen;
-        private readonly IServicioPaginacionDetails paginacionDetails;
+        private readonly IServicesPaginacionDetails paginacionDetails;
         private readonly IServicesComment _servicesComment;
-        private readonly IRepositoryPost _repository;
-        public PostController(IRepositoryPost repository, IWebHostEnvironment environment, IMapper mapper,
-            IServicicesComboBox comboBox, IGuardarimagen guardarimagen, IServicioPaginacionDetails paginacionDetails,
+        private readonly IServicesPost _repository;
+        public PostController(IServicesPost repository, IWebHostEnvironment environment, IMapper mapper,
+            IServicicesComboBox comboBox, IGuardarimagen guardarimagen, IServicesPaginacionDetails paginacionDetails,
             IServicesComment servicesComment)
         {
             this.environment = environment;
